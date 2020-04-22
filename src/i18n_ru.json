@@ -1,0 +1,157 @@
+{
+  "register": {
+    "caption": "Регистрация",
+    "headText": "информационный текст",
+    "rezident": "Резидент",
+    "norezident": "Нерезидент",
+    "progressIndicator": {
+      "caption": "Выполняется отправка данных..."
+    },
+
+    "formFields": {
+      "fullName": {
+        "label": "Полное наименование",
+        "placeholder": "Полное наименование организации",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 2 символа",
+          "minLen": 2
+        }
+      },
+      "shortName": {
+        "label": "Краткое наименование",
+        "placeholder": "Краткое наименование организации",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 2 символа",
+          "minLen": 2
+        }
+      },
+      "kpp": {
+        "label": "КПП",
+        "placeholder": "КПП",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 9 символов",
+          "minLen": 9
+        }
+      },
+      "inn": {
+        "label": "ИНН",
+        "placeholder": "ИНН",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 10 символов",
+          "minLen": 10
+        }
+      },
+      "ogrn": {
+        "label": "ОГРН",
+        "placeholder": "ОГРН",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 13 символов",
+          "minLen": 13
+        }
+      },
+      "oktmo": {
+        "label": "ОКТМО/ОКПО",
+        "placeholder": "ОКТМО/ОКПО",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 11 символов",
+          "minLen": 11
+        }
+      },
+      "egrul": {
+        "label": "ЕГРЮЛ",
+        "placeholder": "ЕГРЮЛ",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 15 символов",
+          "minLen": 15
+        }
+      },
+      "engName": {
+        "label": "Наименование на иностранном языке",
+        "placeholder": "Наименование на иностранном языке",
+        "validation": {
+          "emptyValue": "Поле обязательное, минимум 2 символа",
+          "minLen": 2
+        }
+      },
+      "adress": {
+        "label": "Адрес",
+        "placeholder": "Адрес",
+        "validation": {
+          "emptyValue": "Поле обязательное",
+          "minLen": 0
+        }
+      },
+      "adressEng": {
+        "label": "Адрес на иностранном языке",
+        "placeholder": "Адрес на иностранном языке",
+        "validation": {
+          "emptyValue": "Поле обязательное",
+          "minLen": 0
+        }
+      },
+
+      "email": {
+        "label": "Email",
+        "placeholder": "Введите Ваш Email",
+        "validation": {
+          "emptyValue": "Необходимо ввести корректный Email"
+        }
+      },
+
+      "category": {
+        "label": "Выберите кем вы являетесь",
+        "placeholder": "Выберите..",
+        "validation": { "emptyValue": "Выберите категорию" },
+        "items": [
+          { "id": "0", "text": "Резидент", "checked": "checked" },
+          { "id": "1", "text": "Нерезидент", "checked": "" }
+        ]
+      },
+
+      "captcha": {
+        "label": "Введите код с картинки",
+        "validation": {
+          "emptyOrIncorrect": "Введите корректный код. Нажмите на картинку если не можете прочитать символы"
+        }
+      },
+
+      "message": {
+        "label": "Сообщение",
+        "placeholder": "Опишите свое предложение или ошибку",
+        "validation": {
+          "emptyValue": "Вам необходимо описать Ваше предложение или ошибку",
+          "minLen": 5
+        }
+      },
+
+      "btnSend": {
+        "caption": "Отправить"
+      }
+    },
+
+    "attachmentList": {
+      "maxFiles": 5,
+      "maxTotalFileSizeMb": 5,
+      "validation": {
+        "maxFiles": "Разрешено не более 5 файлов",
+        "maxTotalFileSizeMb": "Максимальный размер всех файлов не более 5 Мб"
+      },
+      "caption": "Вложения",
+      "total": "Общий размер",
+      "addAttachment": {
+        "label": "Выберите ...",
+        "placeholder": ""
+      }
+    },
+
+    "errors": {
+      "404": "Сервис недоступен. Повторите попытку позже. Возможно ведутся технические работы. Приносим свои извинения.",
+      "500": "Сервис недоступен. Повторите попытку позже. Возможно ведутся технические работы. Приносим свои извинения."
+    },
+
+    "success": {
+      "0": "Ваш запрос был отправлен в службу поддержки. Спасибо за ваше участие!",
+      "1": "Ваше предложение зарегистрировано. Спасибо за ваше участие!"
+    }
+  }
+}
