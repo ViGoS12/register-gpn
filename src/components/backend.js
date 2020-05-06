@@ -40,10 +40,32 @@ class Backend {
     const fullNameEncoded = encodeURI(oData.get("fullName"));
     const emailEncoded = encodeURI(oData.get("email"));
     const messageEncoded = encodeURI(oData.get("message"));
+    const adressEncoded = encodeURI(oData.get("adress"));
+    const adressEngEncoded = encodeURI(oData.get("adressEng"));
+    const categoryEncoded = encodeURI(oData.get("category"));
+    const egrulEncoded = encodeURI(oData.get("egrul"));
+    const innEncoded = encodeURI(oData.get("inn"));
+    const kppEncoded = encodeURI(oData.get("kpp"));
+    const nameEngEncoded = encodeURI(oData.get("nameEng"));
+    const ogrnEncoded = encodeURI(oData.get("ogrn"));
+    const oktmoEncoded = encodeURI(oData.get("oktmo"));
+    const shortNameEncoded = encodeURI(oData.get("shortName"));
+    const tokenEncoded = encodeURI(oData.get("token"));
 
     oData.append("fullNameEncoded", fullNameEncoded);
     oData.append("emailEncoded", emailEncoded);
     oData.append("messageEncoded", messageEncoded);
+    oData.append("adressEncoded", adressEncoded);
+    oData.append("adressEngEncoded", adressEngEncoded);
+    oData.append("categoryEncoded", categoryEncoded);
+    oData.append("egrulEncoded", egrulEncoded);
+    oData.append("innEncoded", innEncoded);
+    oData.append("kppEncoded", kppEncoded);
+    oData.append("nameEngEncoded", nameEngEncoded);
+    oData.append("ogrnEncoded", ogrnEncoded);
+    oData.append("oktmoEncoded", oktmoEncoded);
+    oData.append("shortNameEncoded", shortNameEncoded);
+    oData.append("tokenEncoded", tokenEncoded);
 
     xhr.open("POST", url, true);
     xhr.upload.addEventListener("progress", onUpdateProgress, false);
