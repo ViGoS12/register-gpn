@@ -25,7 +25,7 @@ class RegisterPage extends Component {
   handleSubmit = oForm => {
     const backend = new Backend();
     const url =
-      "/NDI_EPCOMMON_D~gzpn~feedback~services~rs~gazprom-neft.ru/rs/feedback/";
+      "/NDI_EPCOMMON_D~gzpn~regform~services~rs~gazprom-neft.ru/rs/regform/";
     backend.asyncSubmit(
       oForm,
       url,

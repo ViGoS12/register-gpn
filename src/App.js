@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Spinner } from "reactstrap";
 import "./App.css";
 import Backend from "./components/backend";
-//import FeedbackPage from "./components/feedbackpage";
 import i18n_ru from "./i18n_ru.json";
 import RegisterPage from "./components/_registerpage";
 
@@ -18,7 +17,7 @@ class App extends Component {
     this.setState({ i18n: i18n_ru });
     //this.setState({ i18n: null });
     // this.backend.getI18n(
-    //   "/NDI_EPCOMMON_D~gzpn~feedback~services~rs~gazprom-neft.ru/rs/feedback/i18n",
+    //   "/NDI_EPCOMMON_D~gzpn~regform~services~rs~gazprom-neft.ru/rs/regform/i18n",
     //   oI18n => {
     //     this.setState({ i18n: oI18n });
     //     document.title = oI18n.feedback.caption;

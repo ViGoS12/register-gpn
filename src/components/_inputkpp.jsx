@@ -35,6 +35,7 @@ class InputKpp extends InputComponent {
             required
             onChange={this.handleChange}
             value={this.props.value}
+            maxlength={this.props.maxLen}
           />
           <span className="floating-label">{this.props.label}</span>
           <div className="invalid-feedback" stylename="width: 100%">

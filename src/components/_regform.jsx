@@ -8,6 +8,7 @@ import InputInn from "./_inputinn";
 import InputOgrn from "./_inputogrn";
 import InputOktmo from "./_inputoktmo";
 import InputEgrul from "./_inputegrul";
+import InputToken from "./_inputtoken";
 import InputEngName from "./_inputnameeng";
 import InputAdress from "./_inputadress";
 import InputAdressEng from "./_inputadresseng";
@@ -141,6 +142,7 @@ class FeedbackForm extends Component {
                     placeholder={i18n.formFields.kpp.placeholder}
                     invalidMessage={i18n.formFields.kpp.validation.emptyValue}
                     minLen={i18n.formFields.kpp.validation.minLen}
+                    maxLen={i18n.formFields.kpp.validation.maxLen}
                   />
 
                   <InputInn
@@ -151,6 +153,7 @@ class FeedbackForm extends Component {
                     placeholder={i18n.formFields.inn.placeholder}
                     invalidMessage={i18n.formFields.inn.validation.emptyValue}
                     minLen={i18n.formFields.inn.validation.minLen}
+                    maxLen={i18n.formFields.inn.validation.maxLen}
                   />
 
                   <InputOgrn
@@ -161,6 +164,7 @@ class FeedbackForm extends Component {
                     placeholder={i18n.formFields.ogrn.placeholder}
                     invalidMessage={i18n.formFields.ogrn.validation.emptyValue}
                     minLen={i18n.formFields.ogrn.validation.minLen}
+                    maxLen={i18n.formFields.ogrn.validation.maxLen}
                   />
 
                   <InputOktmo
@@ -171,6 +175,7 @@ class FeedbackForm extends Component {
                     placeholder={i18n.formFields.oktmo.placeholder}
                     invalidMessage={i18n.formFields.oktmo.validation.emptyValue}
                     minLen={i18n.formFields.oktmo.validation.minLen}
+                    maxLen={i18n.formFields.oktmo.validation.maxLen}
                   />
 
                   <InputEgrul
@@ -181,6 +186,7 @@ class FeedbackForm extends Component {
                     placeholder={i18n.formFields.egrul.placeholder}
                     invalidMessage={i18n.formFields.egrul.validation.emptyValue}
                     minLen={i18n.formFields.egrul.validation.minLen}
+                    maxLen={i18n.formFields.egrul.validation.maxLen}
                   />
 
                 </div>
@@ -216,6 +222,17 @@ class FeedbackForm extends Component {
                     minLen={i18n.formFields.adressEng.validation.minLen}
                   />
                 </div>
+
+                <InputToken
+                    value={this.state.token}
+                    onValidate={isValid => this.handleValidate("token", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.token.label}
+                    placeholder={i18n.formFields.token.placeholder}
+                    invalidMessage={i18n.formFields.token.validation.emptyValue}
+                    minLen={i18n.formFields.token.validation.minLen}
+                    maxLen={i18n.formFields.token.validation.maxLen}
+                  />
 
                 <InputEmail
                   value={this.state.email}

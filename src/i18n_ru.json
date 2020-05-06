@@ -30,31 +30,35 @@
         "placeholder": "КПП",
         "validation": {
           "emptyValue": "Поле обязательное, минимум 9 символов",
-          "minLen": 9
+          "minLen": 9,
+          "maxLen": 9
         }
       },
       "inn": {
         "label": "ИНН",
         "placeholder": "ИНН",
         "validation": {
-          "emptyValue": "Поле обязательное, минимум 10 символов",
-          "minLen": 10
+          "emptyValue": "Поле обязательное, 10 символов",
+          "minLen": 10,
+          "maxLen": 10
         }
       },
       "ogrn": {
         "label": "ОГРН",
         "placeholder": "ОГРН",
         "validation": {
-          "emptyValue": "Поле обязательное, минимум 13 символов",
-          "minLen": 13
+          "emptyValue": "Поле обязательное, 13 символов",
+          "minLen": 13,
+          "maxLen": 13
         }
       },
       "oktmo": {
         "label": "ОКТМО/ОКПО",
         "placeholder": "ОКТМО/ОКПО",
         "validation": {
-          "emptyValue": "Поле обязательное, минимум 11 символов",
-          "minLen": 11
+          "emptyValue": "Поле обязательное, 11 символов",
+          "minLen": 11,
+          "maxLen": 11
         }
       },
       "egrul": {
@@ -62,7 +66,17 @@
         "placeholder": "ЕГРЮЛ",
         "validation": {
           "emptyValue": "Поле обязательное, минимум 15 символов",
-          "minLen": 15
+          "minLen": 15,
+          "maxLen": 15
+        }
+      },
+      "token": {
+        "label": "Токен",
+        "placeholder": "Токен",
+        "validation": {
+          "emptyValue": "Поле обязательное",
+          "minLen": 1,
+          "maxLen": 999
         }
       },
       "engName": {

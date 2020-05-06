@@ -1,7 +1,7 @@
 import React from "react";
 import InputComponent from "./inputcomponent";
 
-class InputOgrn extends InputComponent {
+class InputToken extends InputComponent {
   handleChange = e => {
     // fire the form change event
     this.props.onChange(e);
@@ -25,18 +25,18 @@ class InputOgrn extends InputComponent {
   render() {
     return (
       <div className={this.props.shouldHide ? 'mb-3 hidden' : 'mb-3'} >
-        {/* <label htmlFor="ogrn">{this.props.label}</label> */}
+        {/* <label htmlFor="egrul">{this.props.label}</label> */}
         <div className="floating-label-group">
           <input
             type="text"
             className="form-control"
-            id="ogrn"
-            name="ogrn"
-            required
+            id="token"
+            name="token"
             onChange={this.handleChange}
             value={this.props.value}
             maxlength={this.props.maxLen}
           />
+          {/* required */}
           <span className="floating-label">{this.props.label}</span>
           <div className="invalid-feedback" stylename="width: 100%">
             {this.props.invalidMessage}
@@ -47,4 +47,4 @@ class InputOgrn extends InputComponent {
   }
 }
 
-export default InputOgrn;
+export default InputToken;
