@@ -1,0 +1,85 @@
+{
+  "feedback": {
+    "caption": "Feedback form",
+    "headText": "Bellow you can fill the form to give us some information about what we can improve",
+    "formCaption": "Fill the fields",
+
+    "progressIndicator": {
+      "caption": "Your request is sending..."
+    },
+
+    "formFields": {
+      "fullName": {
+        "label": "Full name",
+        "placeholder": "Enter your firstname & lastname",
+        "validation": {
+          "emptyValue": "Your username is required.",
+          "minLen": 5
+        }
+      },
+
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "validation": {
+          "emptyValue": "Please enter a valid email address for shipping updates."
+        }
+      },
+
+      "category": {
+        "label": "Request category",
+        "placeholder": "Choose..",
+        "validation": { "emptyValue": "Choose the category" },
+        "items": [
+          { "id": "0", "text": "Error" },
+          { "id": "1", "text": "Suggestion for possible improvements" }
+        ]
+      },
+
+      "captcha": {
+        "label": "Enter the code that you see",
+        "validation": {
+          "emptyOrIncorrect": "Enter the coorect code. Click on image if you can't recognize it"
+        }
+      },
+
+      "message": {
+        "label": "Message",
+        "placeholder": "Type the text",
+        "validation": {
+          "emptyValue": "You should describe your error or suggestion",
+          "minLen": 5
+        }
+      },
+
+      "btnSend": {
+        "caption": "Send request"
+      }
+    },
+
+    "attachmentList": {
+      "maxFiles": 5,
+      "maxTotalFileSizeMb": 5,
+      "validation": {
+        "maxFiles": "There is allowed at most 5 files",
+        "maxTotalFileSizeMb": "The total files size more than 5 Mb"
+      },
+      "caption": "Your files",
+      "total": "Total size",
+      "addAttachment": {
+        "label": "Select one or more files...",
+        "placeholder": ""
+      }
+    },
+
+    "errors": {
+      "404": "Service is unavailable. There are some technical activities. Try again a little bit later.",
+      "500": "There are some problems concerning Feedback service. It might have been caused by technical activities."
+    },
+
+    "success": {
+      "0": "Your request was sent to service desk. Thanks for your involvement!",
+      "1": "Your suggestion was successfully sent. Thanks for your involvement!"
+    }
+  }
+}
