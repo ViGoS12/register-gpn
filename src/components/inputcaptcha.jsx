@@ -17,7 +17,7 @@ class InputCaptcha extends InputComponent {
 
     xhr.open(
       "GET",
-      "/NDI_EPCOMMON_D~gzpn~feedback~services~rs~gazprom-neft.ru/rs/feedback/checkcaptcha/" +
+      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/checkcaptcha/" +
         inputField.value,
       true
     );
@@ -69,7 +69,7 @@ class InputCaptcha extends InputComponent {
               <img
                 id="captchaid"
                 alt=""
-                src="/NDI_EPCOMMON_D~gzpn~feedback~services~rs~gazprom-neft.ru/rs/feedback/captcha"
+                src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/captcha"
                 className="gzpn-captcha-img"
                 onClick={this.handleImageClick}
               />
