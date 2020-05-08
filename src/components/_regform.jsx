@@ -13,32 +13,57 @@ import InputEngName from "./_inputnameeng";
 import InputAdress from "./_inputadress";
 import InputAdressEng from "./_inputadresseng";
 
-import { Form, Col, Row, Card, CardBody, Button } from "reactstrap";
+import { Form, Col, Row, Card, CardBody } from "reactstrap";
 import InputCategory from "./_inputcategory";
 import InputCaptcha from "./inputcaptcha";
 //import TextareaMessage from "./textareamessage";
 //import AttachmentList from "./attachments";
 
-class FeedbackForm extends Component {
+class RegForm extends Component {
   form = React.createRef();
-  attachList = React.createRef();
+  //attachList = React.createRef();
 
   state = {
-    fullName: "",
     email: "",
     category: "",
-    message: "",
+    //message: "",
     checkCode: "",
+    token: "",
+
+    fullName: "",
+    shortName: "",
+    kpp: "",
+    inn: "",
+    ogrn: "",
+    oktmo: "",
+    egrul: "",
+    engName: "",
+    adress: "",
+    adressEng: "",
+    
     validate: {
-      fullname: false,
-      email: false,
       category: false,
-      message: false,
-      checkCode: false
+      email: false,
+      //checkCode: false
+      //message: false,
+      
+    },
+    validateRez: {
+      fullname: false,
+      shortName: false,
+      kpp: false,
+      inn: false,
+      ogrn: false,
+      oktmo: false,
+      egrul: false
+    },
+    validateNoRez: {
+      engName: false,
+      adress: false,
+      adressEng: false
     },
 
     resident: true
-    //activeTab: "1"
   };
 
   handleChanges = e => {
@@ -61,12 +86,21 @@ class FeedbackForm extends Component {
     this.form.current.classList.remove("was-validated");
   };
 
-
   handleSubmit = e => {
     e.preventDefault();
-    const isValid =
-      !Object.values(this.state.validate).includes(false) &&
-      this.attachList.current.isValid();
+    // const isValid =
+    //   !Object.values(this.state.validate).includes(false) &&
+    //   this.attachList.current.isValid();
+    console.log("handleSubmit validate ", this.state);
+
+    let isValid;
+    if (this.state.category === "0") {
+      isValid = !Object.values(this.state.validate).includes(false) && !Object.values(this.state.validateRez).includes(false);
+    } else if (this.state.category === "1") {
+      isValid = !Object.values(this.state.validate).includes(false) && !Object.values(this.state.validateNoRez).includes(false);
+    } else {
+      isValid = false;
+    }
 
     if (isValid) {
       this.props.onSubmit(e.target);
@@ -79,6 +113,18 @@ class FeedbackForm extends Component {
     let validate = { ...this.state.validate };
     validate[param] = isValid;
     this.setState({ validate: validate });
+  };
+
+  handleValidateRez = (param, isValid) => {
+    let validate = { ...this.state.validateRez };
+    validate[param] = isValid;
+    this.setState({ validateRez: validate });
+  };
+
+  handleValidateNoRez = (param, isValid) => {
+    let validate = { ...this.state.validateNoRez };
+    validate[param] = isValid;
+    this.setState({ validateNoRez: validate });
   };
 
   render() {
@@ -113,20 +159,20 @@ class FeedbackForm extends Component {
                   invalidMessage={i18n.formFields.category.validation.emptyValue}
                 />
 
-                <InputFullname
-                  value={this.state.fullname}
-                  onValidate={isValid => this.handleValidate("fullname", isValid)}
-                  onChange={this.handleChanges}
-                  label={i18n.formFields.fullName.label}
-                  placeholder={i18n.formFields.fullName.placeholder}
-                  invalidMessage={i18n.formFields.fullName.validation.emptyValue}
-                  minLen={i18n.formFields.fullName.validation.minLen}
-                />
-
                 <div id="resident-info" className={this.state.resident ? '' : 'hidden'}>
+                  <InputFullname
+                    value={this.state.fullname}
+                    onValidate={isValid => this.handleValidateRez("fullname", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.fullName.label}
+                    placeholder={i18n.formFields.fullName.placeholder}
+                    invalidMessage={i18n.formFields.fullName.validation.emptyValue}
+                    minLen={i18n.formFields.fullName.validation.minLen}
+                  />
+
                   <InputShortname
                     value={this.state.shortName}
-                    onValidate={isValid => this.handleValidate("shortName", isValid)}
+                    onValidate={isValid => this.handleValidateRez("shortName", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.shortName.label}
                     placeholder={i18n.formFields.shortName.placeholder}
@@ -136,7 +182,7 @@ class FeedbackForm extends Component {
 
                   <InputKpp
                     value={this.state.kpp}
-                    onValidate={isValid => this.handleValidate("kpp", isValid)}
+                    onValidate={isValid => this.handleValidateRez("kpp", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.kpp.label}
                     placeholder={i18n.formFields.kpp.placeholder}
@@ -147,7 +193,7 @@ class FeedbackForm extends Component {
 
                   <InputInn
                     value={this.state.inn}
-                    onValidate={isValid => this.handleValidate("inn", isValid)}
+                    onValidate={isValid => this.handleValidateRez("inn", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.inn.label}
                     placeholder={i18n.formFields.inn.placeholder}
@@ -158,7 +204,7 @@ class FeedbackForm extends Component {
 
                   <InputOgrn
                     value={this.state.ogrn}
-                    onValidate={isValid => this.handleValidate("ogrn", isValid)}
+                    onValidate={isValid => this.handleValidateRez("ogrn", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.ogrn.label}
                     placeholder={i18n.formFields.ogrn.placeholder}
@@ -169,7 +215,7 @@ class FeedbackForm extends Component {
 
                   <InputOktmo
                     value={this.state.oktmo}
-                    onValidate={isValid => this.handleValidate("oktmo", isValid)}
+                    onValidate={isValid => this.handleValidateRez("oktmo", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.oktmo.label}
                     placeholder={i18n.formFields.oktmo.placeholder}
@@ -180,7 +226,7 @@ class FeedbackForm extends Component {
 
                   <InputEgrul
                     value={this.state.egrul}
-                    onValidate={isValid => this.handleValidate("egrul", isValid)}
+                    onValidate={isValid => this.handleValidateRez("egrul", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.egrul.label}
                     placeholder={i18n.formFields.egrul.placeholder}
@@ -194,7 +240,7 @@ class FeedbackForm extends Component {
                 <div id="no-resident-info" className={this.state.resident ? 'hidden' : ''}>
                   <InputEngName
                     value={this.state.engName}
-                    onValidate={isValid => this.handleValidate("engName", isValid)}
+                    onValidate={isValid => this.handleValidateNoRez("engName", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.engName.label}
                     placeholder={i18n.formFields.engName.placeholder}
@@ -204,7 +250,7 @@ class FeedbackForm extends Component {
 
                   <InputAdress
                     value={this.state.adress}
-                    onValidate={isValid => this.handleValidate("adress", isValid)}
+                    onValidate={isValid => this.handleValidateNoRez("adress", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.adress.label}
                     placeholder={i18n.formFields.adress.placeholder}
@@ -214,7 +260,7 @@ class FeedbackForm extends Component {
 
                   <InputAdressEng
                     value={this.state.adressEng}
-                    onValidate={isValid => this.handleValidate("adressEng", isValid)}
+                    onValidate={isValid => this.handleValidateNoRez("adressEng", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.adressEng.label}
                     placeholder={i18n.formFields.adressEng.placeholder}
@@ -274,4 +320,4 @@ class FeedbackForm extends Component {
     );
   }
 }
-export default FeedbackForm;
+export default RegForm;

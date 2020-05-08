@@ -34,7 +34,7 @@ class InputToken extends InputComponent {
             name="token"
             onChange={this.handleChange}
             value={this.props.value}
-            maxlength={this.props.maxLen}
+            maxLength={this.props.maxLen}
           />
           {/* required */}
           <span className="floating-label">{this.props.label}</span>
