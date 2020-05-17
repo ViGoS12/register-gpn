@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import RegForm from "./_regform";
 import Backend from "./backend";
 import ProgressIndicator from "./progressindicator";
+import { Alert, Button } from "reactstrap";
+//import { useHistory } from "react-router-dom";
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -11,17 +13,29 @@ class RegisterPage extends Component {
       headtext: props.i18n.headText,
       status: undefined,
       progress: undefined,
-      httpError: undefined
+      httpError: undefined,
+      tokenVerified: undefined
     };
   }
 
   componentDidMount() {
+    // link with token from email
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    let token = params.get('token');
+    console.log(token);
+
+    // ie
     let ie = require("ie-version");
     if (ie.version && ie.version <= 9) {
       this.setState({ status: "oldbrowser" });
-    } else if (
-      /// read url property
-    )
+    } else if (token) {
+      //this.verifyToken(token);
+
+      //test pages
+      //this.setState({ status: "tokenFromEmailValid" });
+      this.setState({ status: "tokenFromEmailNotValid" });
+    }
   }
 
   handleSubmit = oForm => {
@@ -90,26 +104,72 @@ class RegisterPage extends Component {
     );
   };
 
-  handleLinkFromEmail = httpError => {
-    this.setState({
-      status: "error",
-      httpError: httpError,
-      headtext: this.props.i18n.errors[httpError]
-    });
+  verifyToken(sToken) {
+    //http://localhost:3000/?token=123
+    const backend = new Backend();
+    const url =
+      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/";
+    backend.asyncSubmitVerifyToken(
+      sToken,
+      url,
+      this.handleResponseTokenVerify,
+      this.handleProgress,
+      this.handleError
+    );
+  }
+
+  handleResponseTokenVerify = oResponse => {
+    console.log("handleResponseVerify", oResponse);
+
+    if (oResponse.response.tokenValid) {
+      this.setState({ status: "tokenFromEmailNotValid" });
+    } else {
+      this.setState({ status: "tokenFromEmailValid" });
+    }
   };
 
-  linkFromEmailPage() {
+  tokenFromEmailValidPage() {
+    // let history = useHistory();
+
+    function handleClick() {
+      //history.push("/");
+      window.location.assign("/");
+    }
     return (
       <React.Fragment>
         <p className="LinkFromEmailPage">
-          Ваша учетная запись подтверждена.
+          <Alert color="success">
+            {this.props.i18n.tokenFromEmailValidPage.success}
+          </Alert>
+          <Button outline color="primary" onClick={handleClick}>Вернуться к форме регистрации</Button>
         </p>
-        <p className="LinkFromEmailPage">
+        {/* <p className="LinkFromEmailPage">
           Your account has been succesfully validated.
-        </p>
+        </p> */}
       </React.Fragment>
     );
-  }
+  };
+
+  tokenFromEmailNotValidPage() {
+    // let history = useHistory();
+    function handleClick() {
+      //history.push("/");
+      window.location.assign("/");
+    }
+    return (
+      <React.Fragment>
+        <p className="LinkFromEmailPage">
+          <Alert color="danger">
+            {this.props.i18n.tokenFromEmailValidPage.error}
+          </Alert>
+          <Button outline color="primary" onClick={handleClick}>Вернуться к форме регистрации</Button>
+        </p>
+        {/* <p className="LinkFromEmailPage">
+          Your account has been not validated.
+        </p> */}
+      </React.Fragment>
+    );
+  };
 
   render() {
     const i18n = this.props.i18n;
@@ -125,9 +185,13 @@ class RegisterPage extends Component {
       case "progress":
         content = <ProgressIndicator value={this.state.progress} />;
         break;
-      case "linkfromemail":
-        content = this.linkFromEmailPage();
+      case "tokenFromEmailValid":
+        content = this.tokenFromEmailValidPage();
         break;
+      case "tokenFromEmailNotValid":
+        content = this.tokenFromEmailNotValidPage();
+        break;
+
       default:
         content = <RegForm i18n={i18n} onSubmit={this.handleSubmit} />;
     }

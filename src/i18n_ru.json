@@ -8,6 +8,10 @@
     "progressIndicator": {
       "caption": "Выполняется отправка данных..."
     },
+    "tokenFromEmailValidPage": {
+      "success": "Ваша учетная запись подтверждена.",
+      "error": "Ваша учетная запись не подтверждена. Ссылка не верна."
+    },
 
     "formFields": {
       "fullName": {

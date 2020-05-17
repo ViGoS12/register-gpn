@@ -97,6 +97,30 @@ class Backend {
     };
   }
 
+  asyncSubmitVerifyToken(sToken, url, onResponse, onUpdateProgress, onError) {
+    const xhr = this.createXHR();
+    
+    let oData = {"token": sToken};
+
+    xhr.open("POST", url, true);
+    xhr.upload.addEventListener("progress", onUpdateProgress, false);
+
+    xhr.send(oData);
+    xhr.onreadystatechange = () => {
+      console.log(xhr.status);
+      if (xhr.readyState !== 4) {
+        return false;
+      }
+
+      if (xhr.status !== 200) {
+        onError(xhr.status);
+      } else {
+        onResponse(JSON.parse(xhr.responseText));
+      }
+    };
+  }
+
+
   createXHR() {
     let xmlhttp = false;
     for (let i = 0; i < this.XMLHttpFactories.length; i++) {
