@@ -15,17 +15,17 @@ class App extends Component {
 
   updateI18n() {
     //LOCAL
-    //this.setState({ i18n: i18n_ru });
+    this.setState({ i18n: i18n_ru });
     
     //SERVER
-    this.setState({ i18n: null });
-    this.backend.getI18n(
-      "/NDI_EPCOMMON_D~gzpn~regform~services~rs~gazprom-neft.ru/rs/regform/i18n",
-      oI18n => {
-        this.setState({ i18n: oI18n });
-        document.title = oI18n.register.caption;
-      }
-    );
+    // this.setState({ i18n: null });
+    // this.backend.getI18n(
+    //   "/NDI_EPCOMMON_D~gzpn~regform~services~rs~gazprom-neft.ru/rs/regform/i18n",
+    //   oI18n => {
+    //     this.setState({ i18n: oI18n });
+    //     document.title = oI18n.register.caption;
+    //   }
+    // );
   }
 
   componentDidMount() {

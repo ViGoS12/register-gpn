@@ -19,7 +19,9 @@ class RegisterPage extends Component {
     let ie = require("ie-version");
     if (ie.version && ie.version <= 9) {
       this.setState({ status: "oldbrowser" });
-    }
+    } else if (
+      /// read url property
+    )
   }
 
   handleSubmit = oForm => {
@@ -86,6 +88,27 @@ class RegisterPage extends Component {
         </p>
       </React.Fragment>
     );
+  };
+
+  handleLinkFromEmail = httpError => {
+    this.setState({
+      status: "error",
+      httpError: httpError,
+      headtext: this.props.i18n.errors[httpError]
+    });
+  };
+
+  linkFromEmailPage() {
+    return (
+      <React.Fragment>
+        <p className="LinkFromEmailPage">
+          Ваша учетная запись подтверждена.
+        </p>
+        <p className="LinkFromEmailPage">
+          Your account has been succesfully validated.
+        </p>
+      </React.Fragment>
+    );
   }
 
   render() {
@@ -101,6 +124,9 @@ class RegisterPage extends Component {
         break;
       case "progress":
         content = <ProgressIndicator value={this.state.progress} />;
+        break;
+      case "linkfromemail":
+        content = this.linkFromEmailPage();
         break;
       default:
         content = <RegForm i18n={i18n} onSubmit={this.handleSubmit} />;

@@ -34,7 +34,7 @@ class InputCategory extends InputComponent {
               <label className="custom-control-label" htmlFor={item.id}>
                 {item.text}
               </label>
-
+              
               {this.props.items.length - 1 === Number.parseInt(item.id) && (
                 <div className="invalid-feedback" stylename="width: 100%">
                   {this.props.invalidMessage}
@@ -42,8 +42,10 @@ class InputCategory extends InputComponent {
               )}
             </div>
           ))}
+          <div className="text-muted">
+                  {this.props.infoMessage}
+              </div>
         </div>
-        <hr className="mb-4" />
       </React.Fragment>
     );
   }

@@ -4,6 +4,7 @@
     "headText": "информационный текст",
     "rezident": "Резидент",
     "norezident": "Нерезидент",
+    "organizationHeader": "Организация",
     "progressIndicator": {
       "caption": "Выполняется отправка данных..."
     },
@@ -108,13 +109,69 @@
         "label": "Email",
         "placeholder": "Введите Ваш Email",
         "validation": {
-          "emptyValue": "Необходимо ввести корректный Email"
+          "emptyValue": "Необходимо ввести корректный Email",
+          "minLen": 1
+        }
+      },
+
+      "emailOrg": {
+        "label": "Email организации",
+        "placeholder": "Введите Email организации",
+        "validation": {
+          "emptyValue": "Необходимо ввести корректный Email",
+          "minLen": 1
+        }
+      },
+
+      "phoneOrg": {
+        "label": "Телефон организации",
+        "placeholder": "Введите Телефон организации",
+        "validation": {
+          "emptyValue": "Необходимо ввести корректный телефон",
+          "minLen": 1
+        }
+      },
+
+      "regNum": {
+        "label": "Регистрационный номер",
+        "placeholder": "Введите регистрационный номер организации нерезидента",
+        "validation": {
+          "emptyValue": "Необходимо ввести корректный номер",
+          "minLen": 1
+        }
+      },
+
+      "userName": {
+        "label": "Имя",
+        "placeholder": "Введите Ваше имя",
+        "validation": {
+          "emptyValue": "Необходимо имя",
+          "minLen": 1
+        }
+      },
+
+      "userSurname": {
+        "label": "Фамилия",
+        "placeholder": "Введите фамилию ",
+        "validation": {
+          "emptyValue": "Необходимо ввести фамилию",
+          "minLen": 1
+        }
+      },
+
+      "userSecondName": {
+        "label": "Отчество / второе имя",
+        "placeholder": "Введите Отчество",
+        "validation": {
+          "emptyValue": "Необходимо ввести отчество",
+          "minLen": 1
         }
       },
 
       "category": {
-        "label": "Выберите кем вы являетесь",
+        "label": "Контактные данные",
         "placeholder": "Выберите..",
+        "infoMessage": "Обязательно выберите кем вы являетесь перед началом заполнения формы",
         "validation": { "emptyValue": "Выберите категорию" },
         "items": [
           { "id": "0", "text": "Резидент", "checked": "checked" },
@@ -134,7 +191,7 @@
         "placeholder": "Опишите свое предложение или ошибку",
         "validation": {
           "emptyValue": "Вам необходимо описать Ваше предложение или ошибку",
-          "minLen": 5
+          "minLen": 2
         }
       },
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import InputEmail from "./_inputemail";
 import InputSendBtn from "./inputsendbtn";
 import InputFullname from "./_inputfullname";
@@ -9,9 +10,15 @@ import InputOgrn from "./_inputogrn";
 import InputOktmo from "./_inputoktmo";
 import InputEgrul from "./_inputegrul";
 import InputToken from "./_inputtoken";
-import InputEngName from "./_inputnameeng";
-import InputAdress from "./_inputadress";
-import InputAdressEng from "./_inputadresseng";
+//import InputEngName from "./_inputnameeng";
+//import InputAdress from "./_inputadress";
+//import InputAdressEng from "./_inputadresseng";
+import InputEmailOrg from "./_inputemailorg";
+import InputPhoneOrg from "./_inputphoneorg";
+import InputRegNum from "./_inputregnum";
+import InputUserName from "./_inputusername";
+import InputSecondName from "./_inputusersecondname";
+import InputUserSurname from "./_inputusershurname";
 
 import { Form, Col, Row, Card, CardBody } from "reactstrap";
 import InputCategory from "./_inputcategory";
@@ -24,11 +31,7 @@ class RegForm extends Component {
   //attachList = React.createRef();
 
   state = {
-    email: "",
     category: "",
-    //message: "",
-    checkCode: "",
-    token: "",
 
     fullName: "",
     shortName: "",
@@ -37,16 +40,30 @@ class RegForm extends Component {
     ogrn: "",
     oktmo: "",
     egrul: "",
-    engName: "",
-    adress: "",
-    adressEng: "",
+    emailOrg: "",
+    phoneOrg: "",
+    regNum: "",
+    email: "",
+    userName: "",
+    userSecondName: "",
+    userSurname: "",
+    //engName: "",
+    //adress: "",
+    //adressEng: "",
+    //message: "",
+    checkCode: "",
+    token: "",
     
     validate: {
       category: false,
       email: false,
-      //checkCode: false
+      emailOrg: false,
+      phoneOrg: false,
+      userName: false,
+      userSecondName: false,
+      userSurname: false
+      //checkCode: false     /// ????????????
       //message: false,
-      
     },
     validateRez: {
       fullname: false,
@@ -58,9 +75,10 @@ class RegForm extends Component {
       egrul: false
     },
     validateNoRez: {
-      engName: false,
-      adress: false,
-      adressEng: false
+      //engName: false,
+      //adress: false,
+      //adressEng: false
+      regNum: false
     },
 
     resident: true
@@ -147,7 +165,7 @@ class RegForm extends Component {
           /> */}
           <Col md={{ size: 12, order: 1 }}>
 
-            <Card body>
+            <Card body style={{ marginBottom: '1rem' }} >
 
               <CardBody>
 
@@ -157,10 +175,51 @@ class RegForm extends Component {
                   items={i18n.formFields.category.items}
                   label={i18n.formFields.category.label}
                   invalidMessage={i18n.formFields.category.validation.emptyValue}
+                  infoMessage={i18n.formFields.category.infoMessage}
                 />
 
-                <div id="resident-info" className={this.state.resident ? '' : 'hidden'}>
-                  <InputFullname
+                <InputUserName
+                    value={this.state.userName}
+                    onValidate={isValid => this.handleValidate("userName", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.userName.label}
+                    placeholder={i18n.formFields.userName.placeholder}
+                    invalidMessage={i18n.formFields.userName.validation.emptyValue}
+                    minLen={i18n.formFields.userName.validation.minLen}
+                  />
+
+                <InputSecondName
+                    value={this.state.userSecondName}
+                    onValidate={isValid => this.handleValidate("userSecondName", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.userSecondName.label}
+                    placeholder={i18n.formFields.userSecondName.placeholder}
+                    invalidMessage={i18n.formFields.userSecondName.validation.emptyValue}
+                    minLen={i18n.formFields.userSecondName.validation.minLen}
+                  />
+
+                <InputUserSurname
+                    value={this.state.userSurname}
+                    onValidate={isValid => this.handleValidate("userSurname", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.userSurname.label}
+                    placeholder={i18n.formFields.userSurname.placeholder}
+                    invalidMessage={i18n.formFields.userSurname.validation.emptyValue}
+                    minLen={i18n.formFields.userSurname.validation.minLen}
+                  />
+
+                <InputEmail
+                    value={this.state.email}
+                    onValidate={isValid => this.handleValidate("email", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.email.label}
+                    placeholder={i18n.formFields.email.placeholder}
+                    invalidMessage={i18n.formFields.email.validation.emptyValue}
+                  />
+                
+                <h5 className="mb-3 mt-5" >{i18n.organizationHeader}</h5>
+
+                <InputFullname
                     value={this.state.fullname}
                     onValidate={isValid => this.handleValidateRez("fullname", isValid)}
                     onChange={this.handleChanges}
@@ -170,7 +229,7 @@ class RegForm extends Component {
                     minLen={i18n.formFields.fullName.validation.minLen}
                   />
 
-                  <InputShortname
+                <InputShortname
                     value={this.state.shortName}
                     onValidate={isValid => this.handleValidateRez("shortName", isValid)}
                     onChange={this.handleChanges}
@@ -178,6 +237,19 @@ class RegForm extends Component {
                     placeholder={i18n.formFields.shortName.placeholder}
                     invalidMessage={i18n.formFields.shortName.validation.emptyValue}
                     minLen={i18n.formFields.shortName.validation.minLen}
+                  />
+
+                <div id="resident-info" className={this.state.resident ? '' : 'hidden'}>
+
+                  <InputInn
+                    value={this.state.inn}
+                    onValidate={isValid => this.handleValidateRez("inn", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.inn.label}
+                    placeholder={i18n.formFields.inn.placeholder}
+                    invalidMessage={i18n.formFields.inn.validation.emptyValue}
+                    minLen={i18n.formFields.inn.validation.minLen}
+                    maxLen={i18n.formFields.inn.validation.maxLen}
                   />
 
                   <InputKpp
@@ -191,15 +263,15 @@ class RegForm extends Component {
                     maxLen={i18n.formFields.kpp.validation.maxLen}
                   />
 
-                  <InputInn
-                    value={this.state.inn}
-                    onValidate={isValid => this.handleValidateRez("inn", isValid)}
+                  <InputOktmo
+                    value={this.state.oktmo}
+                    onValidate={isValid => this.handleValidateRez("oktmo", isValid)}
                     onChange={this.handleChanges}
-                    label={i18n.formFields.inn.label}
-                    placeholder={i18n.formFields.inn.placeholder}
-                    invalidMessage={i18n.formFields.inn.validation.emptyValue}
-                    minLen={i18n.formFields.inn.validation.minLen}
-                    maxLen={i18n.formFields.inn.validation.maxLen}
+                    label={i18n.formFields.oktmo.label}
+                    placeholder={i18n.formFields.oktmo.placeholder}
+                    invalidMessage={i18n.formFields.oktmo.validation.emptyValue}
+                    minLen={i18n.formFields.oktmo.validation.minLen}
+                    maxLen={i18n.formFields.oktmo.validation.maxLen}
                   />
 
                   <InputOgrn
@@ -211,17 +283,6 @@ class RegForm extends Component {
                     invalidMessage={i18n.formFields.ogrn.validation.emptyValue}
                     minLen={i18n.formFields.ogrn.validation.minLen}
                     maxLen={i18n.formFields.ogrn.validation.maxLen}
-                  />
-
-                  <InputOktmo
-                    value={this.state.oktmo}
-                    onValidate={isValid => this.handleValidateRez("oktmo", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.oktmo.label}
-                    placeholder={i18n.formFields.oktmo.placeholder}
-                    invalidMessage={i18n.formFields.oktmo.validation.emptyValue}
-                    minLen={i18n.formFields.oktmo.validation.minLen}
-                    maxLen={i18n.formFields.oktmo.validation.maxLen}
                   />
 
                   <InputEgrul
@@ -238,7 +299,7 @@ class RegForm extends Component {
                 </div>
 
                 <div id="no-resident-info" className={this.state.resident ? 'hidden' : ''}>
-                  <InputEngName
+                  {/* <InputEngName
                     value={this.state.engName}
                     onValidate={isValid => this.handleValidateNoRez("engName", isValid)}
                     onChange={this.handleChanges}
@@ -246,9 +307,9 @@ class RegForm extends Component {
                     placeholder={i18n.formFields.engName.placeholder}
                     invalidMessage={i18n.formFields.engName.validation.emptyValue}
                     minLen={i18n.formFields.engName.validation.minLen}
-                  />
+                  /> */}
 
-                  <InputAdress
+                  {/* <InputAdress
                     value={this.state.adress}
                     onValidate={isValid => this.handleValidateNoRez("adress", isValid)}
                     onChange={this.handleChanges}
@@ -266,8 +327,38 @@ class RegForm extends Component {
                     placeholder={i18n.formFields.adressEng.placeholder}
                     invalidMessage={i18n.formFields.adressEng.validation.emptyValue}
                     minLen={i18n.formFields.adressEng.validation.minLen}
+                  /> */}
+
+                  <InputRegNum
+                    value={this.state.regNum}
+                    onValidate={isValid => this.handleValidateNoRez("regNum", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.regNum.label}
+                    placeholder={i18n.formFields.regNum.placeholder}
+                    invalidMessage={i18n.formFields.regNum.validation.emptyValue}
+                    minLen={i18n.formFields.regNum.validation.minLen}
                   />
                 </div>
+
+                
+                <InputPhoneOrg
+                  value={this.state.phoneOrg}
+                  onValidate={isValid => this.handleValidate("phoneOrg", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.phoneOrg.label}
+                  placeholder={i18n.formFields.phoneOrg.placeholder}
+                  invalidMessage={i18n.formFields.phoneOrg.validation.emptyValue}
+                  minLen={i18n.formFields.phoneOrg.validation.minLen}
+                />
+
+                <InputEmailOrg
+                  value={this.state.emailOrg}
+                  onValidate={isValid => this.handleValidate("emailOrg", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.emailOrg.label}
+                  placeholder={i18n.formFields.emailOrg.placeholder}
+                  invalidMessage={i18n.formFields.emailOrg.validation.emptyValue}
+                />
 
                 <InputToken
                     value={this.state.token}
@@ -279,15 +370,6 @@ class RegForm extends Component {
                     minLen={i18n.formFields.token.validation.minLen}
                     maxLen={i18n.formFields.token.validation.maxLen}
                   />
-
-                <InputEmail
-                  value={this.state.email}
-                  onValidate={isValid => this.handleValidate("email", isValid)}
-                  onChange={this.handleChanges}
-                  label={i18n.formFields.email.label}
-                  placeholder={i18n.formFields.email.placeholder}
-                  invalidMessage={i18n.formFields.email.validation.emptyValue}
-                />
 
                 {/* <TextareaMessage
                             value={this.state.message}
@@ -308,11 +390,17 @@ class RegForm extends Component {
                     i18n.formFields.captcha.validation.emptyOrIncorrect
                   }
                 />
-                <InputSendBtn caption={i18n.formFields.btnSend.caption} />
-              </CardBody>
 
-              {/* <Button>Go somewhere</Button> */}
+                <InputSendBtn caption={i18n.formFields.btnSend.caption} />
+                
+              </CardBody>
             </Card>
+
+            {/* <Card body>
+            <CardTitle>Контактные данные</CardTitle>
+            <CardBody>
+            </CardBody>
+            </Card> */}
 
           </Col>
         </Row>
