@@ -20,7 +20,7 @@ class App extends Component {
     //SERVER
     this.setState({ i18n: null });
     this.backend.getI18n(
-      "/NDI_EPCOMMON_D~gzpn~regform~services~rs~gazprom-neft.ru/rs/regform/i18n",
+      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/i18n",
       oI18n => {
         this.setState({ i18n: oI18n });
         document.title = oI18n.register.caption;
