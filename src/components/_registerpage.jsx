@@ -30,11 +30,11 @@ class RegisterPage extends Component {
     if (ie.version && ie.version <= 9) {
       this.setState({ status: "oldbrowser" });
     } else if (token) {
-      //this.verifyToken(token);
+      this.verifyToken(token);
 
       //test pages
       //this.setState({ status: "tokenFromEmailValid" });
-      this.setState({ status: "tokenFromEmailNotValid" });
+      //this.setState({ status: "tokenFromEmailNotValid" });
     }
   }
 
