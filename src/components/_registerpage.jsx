@@ -108,7 +108,7 @@ class RegisterPage extends Component {
     //http://localhost:3000/?token=123
     const backend = new Backend();
     const url =
-      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/";
+      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/verify";
     backend.asyncSubmitVerifyToken(
       sToken,
       url,
