@@ -159,6 +159,7 @@ class RegisterPage extends Component {
 
   handleResponseTokenVerify = oResponse => {
     console.log("handleResponseVerify", oResponse);
+    //JSON.parse(oResponse);
 
     if (oResponse.response === "Verified") {
       this.setState({ 
