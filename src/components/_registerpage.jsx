@@ -114,7 +114,6 @@ class RegisterPage extends Component {
       sToken,
       url,
       this.handleResponseTokenVerify,
-      this.handleProgress,
       this.handleError
     );
   }

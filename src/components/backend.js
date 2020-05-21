@@ -97,7 +97,7 @@ class Backend {
     };
   }
 
-  asyncSubmitVerifyToken(sToken, url, onResponse, onUpdateProgress, onError) {
+  asyncSubmitVerifyToken(sToken, url, onResponse, onError) {
     const xhr = this.createXHR();
     
     let oData = JSON.stringify({"token": sToken});
