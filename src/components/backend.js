@@ -102,7 +102,8 @@ class Backend {
     
     let oData = {"token": sToken};
 
-    xhr.open("POST", url, true);
+    //xhr.open("POST", url, true);
+    xhr.open("GET", url, true);
     xhr.upload.addEventListener("progress", onUpdateProgress, false);
 
     xhr.send(oData);
