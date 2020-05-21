@@ -100,13 +100,13 @@ class Backend {
   asyncSubmitVerifyToken(sToken, url, onResponse, onUpdateProgress, onError) {
     const xhr = this.createXHR();
     
-    let oData = {"token": sToken};
+    let oData = JSON.stringify({"token": sToken});
 
-    //xhr.open("POST", url, true);
-    xhr.open("GET", url, true);
-    xhr.upload.addEventListener("progress", onUpdateProgress, false);
-
+    //xhr.open("GET", url, true);
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(oData);
+
     xhr.onreadystatechange = () => {
       console.log(xhr.status);
       if (xhr.readyState !== 4) {

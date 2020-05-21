@@ -21,6 +21,7 @@ class RegisterPage extends Component {
   componentDidMount() {
     // link with token from email
     let search = window.location.search;
+    let path = window.location.pathname;
     let params = new URLSearchParams(search);
     let token = params.get('token');
     console.log(token);
