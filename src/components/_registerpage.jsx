@@ -160,10 +160,19 @@ class RegisterPage extends Component {
   handleResponseTokenVerify = oResponse => {
     console.log("handleResponseVerify", oResponse);
 
-    if (oResponse.response === "DONE") {
-      this.setState({ status: "tokenFromEmailNotValid" });
+    if (oResponse.response === "Verified") {
+      this.setState({ 
+        status: "tokenFromEmailNotValid"
+      });
+    } else if (oResponse.response === "NoVerified"){
+      this.setState({ 
+        status: "tokenFromEmailValid"
+      });
     } else {
-      this.setState({ status: "tokenFromEmailValid" });
+      this.setState({ 
+        status: "error",
+        headtext: oResponse.response.exceptionMessage
+      });
     }
   };
 
@@ -172,7 +181,7 @@ class RegisterPage extends Component {
 
     function handleClick() {
       //history.push("/");
-      window.location.assign("/");
+      window.location.assign("/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/");
     }
     return (
       <React.Fragment>
@@ -193,7 +202,7 @@ class RegisterPage extends Component {
     // let history = useHistory();
     function handleClick() {
       //history.push("/");
-      window.location.assign("/");
+      window.location.assign("/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/");
     }
     return (
       <React.Fragment>
