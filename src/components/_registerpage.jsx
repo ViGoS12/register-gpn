@@ -157,15 +157,15 @@ class RegisterPage extends Component {
     // };
   };
 
-  // handleResponseTokenVerify = oResponse => {
-  //   console.log("handleResponseVerify", oResponse);
+  handleResponseTokenVerify = oResponse => {
+    console.log("handleResponseVerify", oResponse);
 
-  //   if (oResponse.response.tokenValid === true) {
-  //     this.setState({ status: "tokenFromEmailNotValid" });
-  //   } else {
-  //     this.setState({ status: "tokenFromEmailValid" });
-  //   }
-  // };
+    if (oResponse.response === "DONE") {
+      this.setState({ status: "tokenFromEmailNotValid" });
+    } else {
+      this.setState({ status: "tokenFromEmailValid" });
+    }
+  };
 
   tokenFromEmailValidPage() {
     // let history = useHistory();

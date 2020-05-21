@@ -98,7 +98,8 @@ class Backend {
   }
 
   asyncSubmitVerifyToken(sToken, url, onResponse, onError) {
-    const xhr = this.createXHR();
+    //const xhr = this.createXHR();
+    const xhr = new XMLHttpRequest();
     
     //let oData = JSON.stringify({"token": sToken});
     // xhr.open("POST", url, true);
