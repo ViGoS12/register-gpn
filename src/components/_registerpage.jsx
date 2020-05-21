@@ -107,54 +107,54 @@ class RegisterPage extends Component {
 
   verifyToken(sToken) {
     //http://localhost:3000/?token=123
-    // const backend = new Backend();
-    // const url =
-    //   "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/verify";
-    // backend.asyncSubmitVerifyToken(
-    //   sToken,
-    //   url,
-    //   this.handleResponseTokenVerify,
-    //   this.handleError
-    // );
-
-    ///
     const backend = new Backend();
-    this.setState({ 
-        status: "progress"});
-    const xhr = backend.createXHR();
-
-    xhr.open(
-      "GET",
-      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/verify?token=" +
-        sToken,
-      true
+    const url =
+      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/verify";
+    backend.asyncSubmitVerifyToken(
+      sToken,
+      url,
+      this.handleResponseTokenVerify,
+      this.handleError
     );
 
-    xhr.send();
-    xhr.onreadystatechange = () => {
-      //let result = false;
-      console.log(xhr.status);
-      if (xhr.readyState !== 4) {
-        return false;
-      }
-      if (xhr.status !== 200) {
-        const oResult = JSON.parse(xhr.responseText);
-        console.log(oResult);
-          /// добавить состояние - ошибка
-          this.setState({ status: "error" });
-          ////
-      } else {
-        const oResult = JSON.parse(xhr.responseText);
-        console.log(oResult);
-        console.log("tokenValid= ", oResult.response.tokenValid);
+    /// GET
+    // const backend = new Backend();
+    // this.setState({ 
+    //     status: "progress"});
+    // const xhr = backend.createXHR();
 
-        if (oResult.response.tokenValid === true) {
-          this.setState({ status: "tokenFromEmailValid" });
-        } else {
-          this.setState({ status: "tokenFromEmailNotValid" });
-        }
-      }
-    };
+    // xhr.open(
+    //   "GET",
+    //   "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/verify?token=" +
+    //     sToken,
+    //   true
+    // );
+
+    // xhr.send();
+    // xhr.onreadystatechange = () => {
+    //   //let result = false;
+    //   console.log(xhr.status);
+    //   if (xhr.readyState !== 4) {
+    //     return false;
+    //   }
+    //   if (xhr.status !== 200) {
+    //     const oResult = JSON.parse(xhr.responseText);
+    //     console.log(oResult);
+    //       /// добавить состояние - ошибка
+    //       this.setState({ status: "error" });
+    //       ////
+    //   } else {
+    //     const oResult = JSON.parse(xhr.responseText);
+    //     console.log(oResult);
+    //     console.log("tokenValid= ", oResult.response.tokenValid);
+
+    //     if (oResult.response.tokenValid === true) {
+    //       this.setState({ status: "tokenFromEmailValid" });
+    //     } else {
+    //       this.setState({ status: "tokenFromEmailNotValid" });
+    //     }
+    //   }
+    // };
   };
 
   // handleResponseTokenVerify = oResponse => {

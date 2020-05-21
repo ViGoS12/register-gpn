@@ -97,29 +97,32 @@ class Backend {
     };
   }
 
-  // asyncSubmitVerifyToken(sToken, url, onResponse, onError) {
-  //   const xhr = this.createXHR();
+  asyncSubmitVerifyToken(sToken, url, onResponse, onError) {
+    const xhr = this.createXHR();
     
-  //   let oData = JSON.stringify({"token": sToken});
+    //let oData = JSON.stringify({"token": sToken});
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    // xhr.send(oData);
 
-  //   //xhr.open("GET", url, true);
-  //   xhr.open("POST", url, true);
-  //   xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-  //   xhr.send(oData);
+    var body = 'token=' + encodeURIComponent(sToken);
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(body);
 
-  //   xhr.onreadystatechange = () => {
-  //     console.log(xhr.status);
-  //     if (xhr.readyState !== 4) {
-  //       return false;
-  //     }
+    xhr.onreadystatechange = () => {
+      console.log(xhr.status);
+      if (xhr.readyState !== 4) {
+        return false;
+      }
 
-  //     if (xhr.status !== 200) {
-  //       onError(xhr.status);
-  //     } else {
-  //       onResponse(JSON.parse(xhr.responseText));
-  //     }
-  //   };
-  // }
+      if (xhr.status !== 200) {
+        onError(xhr.status);
+      } else {
+        onResponse(JSON.parse(xhr.responseText));
+      }
+    };
+  }
 
 
   createXHR() {
