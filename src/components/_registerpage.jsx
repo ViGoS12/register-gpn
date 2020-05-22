@@ -161,11 +161,11 @@ class RegisterPage extends Component {
     console.log("handleResponseVerify", oResponse);
     //JSON.parse(oResponse);
 
-    if (oResponse === "Verified") {
+    if (oResponse === "NoVerified") {
       this.setState({ 
         status: "tokenFromEmailNotValid"
       });
-    } else if (oResponse === "NoVerified"){
+    } else if (oResponse === "Verified"){
       this.setState({ 
         status: "tokenFromEmailValid"
       });
