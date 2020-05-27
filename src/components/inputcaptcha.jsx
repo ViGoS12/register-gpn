@@ -61,7 +61,7 @@ class InputCaptcha extends InputComponent {
   render() {
     return (
       <React.Fragment>
-        <hr className="mt-4" />
+        {/* <hr className="mt-4" /> */}
 
         <div className="mb-3">
           <div className="input-group">

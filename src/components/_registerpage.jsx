@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Spinner } from "reactstrap";
 //import FeedbackForm from "./feedbackform";
 import RegForm from "./_regform";
 import Backend from "./backend";
@@ -32,10 +33,11 @@ class RegisterPage extends Component {
       this.setState({ status: "oldbrowser" });
     } else if (token) {
       this.verifyToken(token);
-
       //test pages
       //this.setState({ status: "tokenFromEmailValid" });
       //this.setState({ status: "tokenFromEmailNotValid" });
+    } else {
+      this.setState({ status: "RegForm" });
     }
   }
 
@@ -241,8 +243,12 @@ class RegisterPage extends Component {
         content = this.tokenFromEmailNotValidPage();
         break;
 
-      default:
+      case "RegForm":
         content = <RegForm i18n={i18n} onSubmit={this.handleSubmit} />;
+        break;
+
+      default:
+        content = <Spinner color="dark" className="spinner" />;
     }
 
     return (

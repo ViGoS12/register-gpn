@@ -50,7 +50,7 @@ class Backend {
     const userNameEncoded = encodeURI(oData.get("userName"));
     const userSecondNameEncoded = encodeURI(oData.get("userSecondName"));
     const userSurenameEncoded = encodeURI(oData.get("userSurname"));
-    const regNameEncoded = encodeURI(oData.get("regName"));
+    const regNameEncoded = encodeURI(oData.get("regNum")); //norezident
     const phoneOrgEncoded = encodeURI(oData.get("phoneOrg"));
     const emailOrgEncoded = encodeURI(oData.get("emailOrg"));
     //const messageEncoded = encodeURI(oData.get("message"));

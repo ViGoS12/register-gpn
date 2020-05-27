@@ -22,6 +22,7 @@ import InputUserSurname from "./_inputusershurname";
 
 import { Form, Col, Row, Card, CardBody } from "reactstrap";
 import InputCategory from "./_inputcategory";
+import Inputcheckpersdata from "./_inputcheckpersdata";
 import InputCaptcha from "./inputcaptcha";
 //import TextareaMessage from "./textareamessage";
 //import AttachmentList from "./attachments";
@@ -53,6 +54,7 @@ class RegForm extends Component {
     //message: "",
     checkCode: "",
     token: "",
+    checkpersdata: "",
     
     validate: {
       category: false,
@@ -61,7 +63,8 @@ class RegForm extends Component {
       phoneOrg: false,
       userName: false,
       userSecondName: false,
-      userSurname: false
+      userSurname: false,
+      checkpersdata: false
       //checkCode: false     /// ????????????
       //message: false,
     },
@@ -340,7 +343,6 @@ class RegForm extends Component {
                   />
                 </div>
 
-                
                 <InputPhoneOrg
                   value={this.state.phoneOrg}
                   onValidate={isValid => this.handleValidate("phoneOrg", isValid)}
@@ -372,14 +374,25 @@ class RegForm extends Component {
                   />
 
                 {/* <TextareaMessage
-                            value={this.state.message}
-                            onChange={this.handleChanges}
-                            onValidate={isValid => this.handleValidate("message", isValid)}
-                            label={i18n.formFields.message.label}
-                            placeholder={i18n.formFields.message.placeholder}
-                            invalidMessage={i18n.formFields.message.validation.emptyValue}
-                            minLen={i18n.formFields.message.validation.minLen}
-                          /> */}
+                  value={this.state.message}
+                  onChange={this.handleChanges}
+                  onValidate={isValid => this.handleValidate("message", isValid)}
+                  label={i18n.formFields.message.label}
+                  placeholder={i18n.formFields.message.placeholder}
+                  invalidMessage={i18n.formFields.message.validation.emptyValue}
+                  minLen={i18n.formFields.message.validation.minLen}
+                /> */}
+
+                <hr className="mt-4" />
+
+                <Inputcheckpersdata
+                  onValidate={isValid => this.handleValidate("checkpersdata", isValid)}
+                  onChange={this.handleChanges}
+                  items={i18n.formFields.checkpersdata.items}
+                  label={i18n.formFields.checkpersdata.label}
+                  invalidMessage={i18n.formFields.checkpersdata.validation.emptyValue}
+                  infoMessage={i18n.formFields.checkpersdata.infoMessage}
+                />
 
                 <InputCaptcha
                   value={this.state.checkCode}
