@@ -16,7 +16,7 @@ class RegisterPage extends Component {
       progress: undefined,
       httpError: undefined,
       tokenVerified: undefined
-    };
+    }; 
   }
 
   componentDidMount() {
