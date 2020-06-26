@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { Form, Col, Row, Card, CardBody } from "reactstrap";
 import InputEmail from "./_inputemail";
 import InputSendBtn from "./inputsendbtn";
 import InputFullname from "./_inputfullname";
@@ -8,22 +9,19 @@ import InputKpp from "./_inputkpp";
 import InputInn from "./_inputinn";
 import InputOgrn from "./_inputogrn";
 import InputOktmo from "./_inputoktmo";
-import InputEgrul from "./_inputegrul";
+//import InputEgrul from "./_inputegrul";
+import InputTokenReg  from "./_inputtokenreg";
 import InputToken from "./_inputtoken";
-//import InputEngName from "./_inputnameeng";
-//import InputAdress from "./_inputadress";
-//import InputAdressEng from "./_inputadresseng";
 import InputEmailOrg from "./_inputemailorg";
 import InputPhoneOrg from "./_inputphoneorg";
 import InputRegNum from "./_inputregnum";
 import InputUserName from "./_inputusername";
 import InputSecondName from "./_inputusersecondname";
 import InputUserSurname from "./_inputusershurname";
-
-import { Form, Col, Row, Card, CardBody } from "reactstrap";
 import InputCategory from "./_inputcategory";
 import Inputcheckpersdata from "./_inputcheckpersdata";
 import InputCaptcha from "./inputcaptcha";
+import MessageWindow from "./messagewindow";
 //import TextareaMessage from "./textareamessage";
 //import AttachmentList from "./attachments";
 
@@ -32,79 +30,75 @@ class RegForm extends Component {
   //attachList = React.createRef();
 
   state = {
-    category: "",
-
+    category: false,
+    tokenReg: false,
+    modal: false,
+    token: "",
+    //user
+    email: "",
+    userName: "",
+    userSecondName: "",
+    userSurname: "",
+    checkpersdata: "",
+    //org
     fullName: "",
     shortName: "",
     kpp: "",
     inn: "",
     ogrn: "",
     oktmo: "",
-    egrul: "",
     emailOrg: "",
     phoneOrg: "",
     regNum: "",
-    email: "",
-    userName: "",
-    userSecondName: "",
-    userSurname: "",
     //engName: "",
     //adress: "",
     //adressEng: "",
-    //message: "",
+    // data
     checkCode: "",
-    token: "",
-    checkpersdata: "",
-    
+    //message: "",
+
     validate: {
-      category: false,
-      email: false,
-      emailOrg: false,
-      phoneOrg: false,
       userName: false,
       userSecondName: false,
       userSurname: false,
-      checkpersdata: false
-      //checkCode: false     /// ????????????
-      //message: false,
-    },
-    validateRez: {
+      email: false,
       fullname: false,
       shortName: false,
       kpp: false,
       inn: false,
       ogrn: false,
       oktmo: false,
-      egrul: false
-    },
-    validateNoRez: {
       //engName: false,
       //adress: false,
       //adressEng: false
-      regNum: false
-    },
+      regNum: false,
+      phoneOrg: false,
+      emailOrg: false,
 
-    resident: true
+      token: false,
+      checkpersdata: false,
+      checkCode: false 
+      //message: false,
+    }
   };
 
   handleChanges = e => {
     const target = e.target;
-    const value = target.value;
     const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
     this.setState({
       [name]: value
     });
 
-    //hide other fields
-    if (name === "category") {
-      if (value === "0") {
-        this.setState({ resident: true })
-      } else {
-        this.setState({ resident: false })
-      }
-    }
     // remove form's top validated style
     this.form.current.classList.remove("was-validated");
+  };
+
+  handleModal = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
   };
 
   handleSubmit = e => {
@@ -115,14 +109,60 @@ class RegForm extends Component {
     console.log("handleSubmit validate ", this.state);
 
     let isValid;
-    if (this.state.category === "0") {
-      isValid = !Object.values(this.state.validate).includes(false) && !Object.values(this.state.validateRez).includes(false);
-    } else if (this.state.category === "1") {
-      isValid = !Object.values(this.state.validate).includes(false) && !Object.values(this.state.validateNoRez).includes(false);
+    // let UserValid = ["userName", "userSecondName", "userSurname", "email", "checkpersdata"];
+    // let RezValid = ["fullname", "shortName", "kpp", "inn","ogrn","oktmo","regNum","phoneOrg","emailOrg"];
+    // let NoRezValid = ["fullname", "shortName","regNum","phoneOrg","emailOrg"];
+    
+    if(
+      this.state.validate.userName &&
+      this.state.validate.userSecondName &&
+      this.state.validate.userSurname &&
+      this.state.validate.email &&
+      this.state.validate.checkpersdata
+    ) {
+      if (this.state.tokenReg) {
+        if (this.state.validate.token) {
+          isValid = true
+        } else {
+          isValid = false
+        }
+      } else {
+        // check rezident or Noresident fields
+        if (this.state.category) {
+          if (
+            this.state.validate.fullname &&
+            this.state.validate.shortName &&
+            this.state.validate.regNum &&
+            this.state.validate.phoneOrg &&
+            this.state.validate.emailOrg
+          ){
+            isValid = true
+          } else {
+            isValid = false
+          }
+        } else {
+          if (
+            this.state.validate.fullname &&
+            this.state.validate.shortName &&
+            this.state.validate.kpp &&
+            this.state.validate.inn &&
+            this.state.validate.ogrn &&
+            this.state.validate.oktmo &&
+            this.state.validate.regNum &&
+            this.state.validate.phoneOrg &&
+            this.state.validate.emailOrg
+          ){
+            isValid = true
+          } else {
+            isValid = false
+          }
+        }
+      }
     } else {
-      isValid = false;
+      isValid = false
     }
 
+    // submit
     if (isValid) {
       this.props.onSubmit(e.target);
     } else {
@@ -134,18 +174,6 @@ class RegForm extends Component {
     let validate = { ...this.state.validate };
     validate[param] = isValid;
     this.setState({ validate: validate });
-  };
-
-  handleValidateRez = (param, isValid) => {
-    let validate = { ...this.state.validateRez };
-    validate[param] = isValid;
-    this.setState({ validateRez: validate });
-  };
-
-  handleValidateNoRez = (param, isValid) => {
-    let validate = { ...this.state.validateNoRez };
-    validate[param] = isValid;
-    this.setState({ validateNoRez: validate });
   };
 
   render() {
@@ -172,14 +200,7 @@ class RegForm extends Component {
 
               <CardBody>
 
-                <InputCategory
-                  onValidate={isValid => this.handleValidate("category", isValid)}
-                  onChange={this.handleChanges}
-                  items={i18n.formFields.category.items}
-                  label={i18n.formFields.category.label}
-                  invalidMessage={i18n.formFields.category.validation.emptyValue}
-                  infoMessage={i18n.formFields.category.infoMessage}
-                />
+              <h5 className="mb-3" >{i18n.userHeader}</h5>
 
                 <InputUserName
                     value={this.state.userName}
@@ -222,9 +243,26 @@ class RegForm extends Component {
                 
                 <h5 className="mb-3 mt-5" >{i18n.organizationHeader}</h5>
 
+                <InputCategory
+                  //onValidate={isValid => this.handleValidate("category", isValid)}
+                  value={this.state.category}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.category.label}
+                  invalidMessage={i18n.formFields.category.validation.emptyValue}
+                  infoMessage={i18n.formFields.category.infoMessage}
+                />
+
+                <InputTokenReg
+                  value={this.state.tokenReg}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.tokenReg.label}
+                />
+
+                <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>
+
                 <InputFullname
                     value={this.state.fullname}
-                    onValidate={isValid => this.handleValidateRez("fullname", isValid)}
+                    onValidate={isValid => this.handleValidate("fullname", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.fullName.label}
                     placeholder={i18n.formFields.fullName.placeholder}
@@ -234,7 +272,7 @@ class RegForm extends Component {
 
                 <InputShortname
                     value={this.state.shortName}
-                    onValidate={isValid => this.handleValidateRez("shortName", isValid)}
+                    onValidate={isValid => this.handleValidate("shortName", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.shortName.label}
                     placeholder={i18n.formFields.shortName.placeholder}
@@ -242,11 +280,11 @@ class RegForm extends Component {
                     minLen={i18n.formFields.shortName.validation.minLen}
                   />
 
-                <div id="resident-info" className={this.state.resident ? '' : 'hidden'}>
+                <div id="resident-info" className={this.state.category ? 'hidden' : ''}>
 
                   <InputInn
                     value={this.state.inn}
-                    onValidate={isValid => this.handleValidateRez("inn", isValid)}
+                    onValidate={isValid => this.handleValidate("inn", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.inn.label}
                     placeholder={i18n.formFields.inn.placeholder}
@@ -257,7 +295,7 @@ class RegForm extends Component {
 
                   <InputKpp
                     value={this.state.kpp}
-                    onValidate={isValid => this.handleValidateRez("kpp", isValid)}
+                    onValidate={isValid => this.handleValidate("kpp", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.kpp.label}
                     placeholder={i18n.formFields.kpp.placeholder}
@@ -268,7 +306,7 @@ class RegForm extends Component {
 
                   <InputOktmo
                     value={this.state.oktmo}
-                    onValidate={isValid => this.handleValidateRez("oktmo", isValid)}
+                    onValidate={isValid => this.handleValidate("oktmo", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.oktmo.label}
                     placeholder={i18n.formFields.oktmo.placeholder}
@@ -279,7 +317,7 @@ class RegForm extends Component {
 
                   <InputOgrn
                     value={this.state.ogrn}
-                    onValidate={isValid => this.handleValidateRez("ogrn", isValid)}
+                    onValidate={isValid => this.handleValidate("ogrn", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.ogrn.label}
                     placeholder={i18n.formFields.ogrn.placeholder}
@@ -288,53 +326,13 @@ class RegForm extends Component {
                     maxLen={i18n.formFields.ogrn.validation.maxLen}
                   />
 
-                  <InputEgrul
-                    value={this.state.egrul}
-                    onValidate={isValid => this.handleValidateRez("egrul", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.egrul.label}
-                    placeholder={i18n.formFields.egrul.placeholder}
-                    invalidMessage={i18n.formFields.egrul.validation.emptyValue}
-                    minLen={i18n.formFields.egrul.validation.minLen}
-                    maxLen={i18n.formFields.egrul.validation.maxLen}
-                  />
-
                 </div>
 
                 <div id="no-resident-info" className={this.state.resident ? 'hidden' : ''}>
-                  {/* <InputEngName
-                    value={this.state.engName}
-                    onValidate={isValid => this.handleValidateNoRez("engName", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.engName.label}
-                    placeholder={i18n.formFields.engName.placeholder}
-                    invalidMessage={i18n.formFields.engName.validation.emptyValue}
-                    minLen={i18n.formFields.engName.validation.minLen}
-                  /> */}
-
-                  {/* <InputAdress
-                    value={this.state.adress}
-                    onValidate={isValid => this.handleValidateNoRez("adress", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.adress.label}
-                    placeholder={i18n.formFields.adress.placeholder}
-                    invalidMessage={i18n.formFields.adress.validation.emptyValue}
-                    minLen={i18n.formFields.adress.validation.minLen}
-                  />
-
-                  <InputAdressEng
-                    value={this.state.adressEng}
-                    onValidate={isValid => this.handleValidateNoRez("adressEng", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.adressEng.label}
-                    placeholder={i18n.formFields.adressEng.placeholder}
-                    invalidMessage={i18n.formFields.adressEng.validation.emptyValue}
-                    minLen={i18n.formFields.adressEng.validation.minLen}
-                  /> */}
 
                   <InputRegNum
                     value={this.state.regNum}
-                    onValidate={isValid => this.handleValidateNoRez("regNum", isValid)}
+                    onValidate={isValid => this.handleValidate("regNum", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.regNum.label}
                     placeholder={i18n.formFields.regNum.placeholder}
@@ -362,8 +360,12 @@ class RegForm extends Component {
                   invalidMessage={i18n.formFields.emailOrg.validation.emptyValue}
                 />
 
+                </div>
+
                 <InputToken
                     value={this.state.token}
+                    required={this.state.tokenReg}
+                    shouldHide={!this.state.tokenReg}
                     onValidate={isValid => this.handleValidate("token", isValid)}
                     onChange={this.handleChanges}
                     label={i18n.formFields.token.label}
@@ -392,6 +394,15 @@ class RegForm extends Component {
                   label={i18n.formFields.checkpersdata.label}
                   invalidMessage={i18n.formFields.checkpersdata.validation.emptyValue}
                   infoMessage={i18n.formFields.checkpersdata.infoMessage}
+                  handleModal={this.handleModal}
+                />
+
+                <MessageWindow
+                  className="classModal"
+                  modal={this.state.modal}
+                  textPD={i18n.formFields.checkpersdata.textPD}
+                  handleModal={this.handleModal}
+                  title={i18n.formFields.checkpersdata.placeholder}
                 />
 
                 <InputCaptcha

@@ -39,8 +39,8 @@ class Backend {
 
     const fullNameEncoded = encodeURI(oData.get("fullName"));
     const emailEncoded = encodeURI(oData.get("email"));
-    const categoryEncoded = encodeURI(oData.get("category"));
-    const egrulEncoded = encodeURI(oData.get("egrul"));
+    const categoryEncoded = encodeURI(oData.get("category") === 'on' ? 1 : 0 );
+    //const egrulEncoded = encodeURI(oData.get("egrul"));
     const innEncoded = encodeURI(oData.get("inn"));
     const kppEncoded = encodeURI(oData.get("kpp"));
     const ogrnEncoded = encodeURI(oData.get("ogrn"));
@@ -61,7 +61,7 @@ class Backend {
     oData.append("fullNameEncoded", fullNameEncoded);
     oData.append("emailEncoded", emailEncoded);
     oData.append("categoryEncoded", categoryEncoded);
-    oData.append("egrulEncoded", egrulEncoded);
+    //oData.append("egrulEncoded", egrulEncoded);
     oData.append("innEncoded", innEncoded);
     oData.append("kppEncoded", kppEncoded);
     oData.append("ogrnEncoded", ogrnEncoded);

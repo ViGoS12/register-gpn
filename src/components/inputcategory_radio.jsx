@@ -1,8 +1,7 @@
 import React from "react";
 import InputComponent from "./inputcomponent";
 
-class Inputcheckpersdata extends InputComponent {
-
+class InputCategory extends InputComponent {
   handleChange = e => {
     // fire the form change event
     this.props.onChange(e);
@@ -11,10 +10,6 @@ class Inputcheckpersdata extends InputComponent {
 
   validateValue = () => {
     this.props.onValidate(true);
-  };
-
-  handleModalToggle = () => {
-    this.props.handleModal();
   };
 
   render() {
@@ -28,8 +23,8 @@ class Inputcheckpersdata extends InputComponent {
                 id={item.id}
                 key={item.id}
                 value={item.id}
-                name="checkpersdata"
-                type="checkbox"
+                name="category"
+                type="radio"
                 className="form-control custom-control-input"
                 onChange={this.handleChange}
                 required
@@ -38,9 +33,7 @@ class Inputcheckpersdata extends InputComponent {
               <label className="custom-control-label" htmlFor={item.id}>
                 {item.text}
               </label>
-              {". "}
-              <a href="javascript:void(null);" onClick={this.handleModalToggle}>Подробнее</a>
-
+              
               {this.props.items.length - 1 === Number.parseInt(item.id) && (
                 <div className="invalid-feedback" stylename="width: 100%">
                   {this.props.invalidMessage}
@@ -48,14 +41,13 @@ class Inputcheckpersdata extends InputComponent {
               )}
             </div>
           ))}
-          {/* <div className="text-muted">
-            {this.props.infoMessage}
-          </div> */}
+          <div className="text-muted">
+                  {this.props.infoMessage}
+              </div>
         </div>
-
       </React.Fragment>
     );
   }
 }
 
-export default Inputcheckpersdata;
+export default InputCategory;
