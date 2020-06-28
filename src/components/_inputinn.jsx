@@ -28,7 +28,7 @@ class InputInn extends InputComponent {
         {/* <label htmlFor="inn">{this.props.label}</label> */}
         <div className="floating-label-group">
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="inn"
             name="inn"

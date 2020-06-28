@@ -28,7 +28,7 @@ class InputKpp extends InputComponent {
         {/* <label htmlFor="kpp">{this.props.label}</label> */}
         <div className="floating-label-group">
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="kpp"
             name="kpp"

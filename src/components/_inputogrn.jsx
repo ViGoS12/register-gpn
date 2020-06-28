@@ -28,7 +28,7 @@ class InputOgrn extends InputComponent {
         {/* <label htmlFor="ogrn">{this.props.label}</label> */}
         <div className="floating-label-group">
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="ogrn"
             name="ogrn"

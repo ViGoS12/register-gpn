@@ -10,7 +10,7 @@ import InputInn from "./_inputinn";
 import InputOgrn from "./_inputogrn";
 import InputOktmo from "./_inputoktmo";
 //import InputEgrul from "./_inputegrul";
-import InputTokenReg  from "./_inputtokenreg";
+import InputTokenReg from "./_inputtokenreg";
 import InputToken from "./_inputtoken";
 import InputEmailOrg from "./_inputemailorg";
 import InputPhoneOrg from "./_inputphoneorg";
@@ -77,7 +77,7 @@ class RegForm extends Component {
 
       token: false,
       checkpersdata: false,
-      checkCode: false 
+      checkCode: false
       //message: false,
     }
   };
@@ -110,10 +110,10 @@ class RegForm extends Component {
 
     let isValid;
     // let UserValid = ["userName", "userSecondName", "userSurname", "email", "checkpersdata"];
-    // let RezValid = ["fullname", "shortName", "kpp", "inn","ogrn","oktmo","regNum","phoneOrg","emailOrg"];
-    // let NoRezValid = ["fullname", "shortName","regNum","phoneOrg","emailOrg"];
-    
-    if(
+    // let RezValid = ["fullname", "shortName", "kpp", "inn","ogrn","oktmo","phoneOrg","emailOrg"];
+    // let NoRezValid = ["fullname", "shortName", "regNum", "phoneOrg","emailOrg"];
+
+    if (
       this.state.validate.userName &&
       this.state.validate.userSecondName &&
       this.state.validate.userSurname &&
@@ -135,7 +135,7 @@ class RegForm extends Component {
             this.state.validate.regNum &&
             this.state.validate.phoneOrg &&
             this.state.validate.emailOrg
-          ){
+          ) {
             isValid = true
           } else {
             isValid = false
@@ -148,10 +148,9 @@ class RegForm extends Component {
             this.state.validate.inn &&
             this.state.validate.ogrn &&
             this.state.validate.oktmo &&
-            this.state.validate.regNum &&
             this.state.validate.phoneOrg &&
             this.state.validate.emailOrg
-          ){
+          ) {
             isValid = true
           } else {
             isValid = false
@@ -200,47 +199,47 @@ class RegForm extends Component {
 
               <CardBody>
 
-              <h5 className="mb-3" >{i18n.userHeader}</h5>
+                <h5 className="mb-3" >{i18n.userHeader}</h5>
 
                 <InputUserName
-                    value={this.state.userName}
-                    onValidate={isValid => this.handleValidate("userName", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.userName.label}
-                    placeholder={i18n.formFields.userName.placeholder}
-                    invalidMessage={i18n.formFields.userName.validation.emptyValue}
-                    minLen={i18n.formFields.userName.validation.minLen}
-                  />
+                  value={this.state.userName}
+                  onValidate={isValid => this.handleValidate("userName", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.userName.label}
+                  placeholder={i18n.formFields.userName.placeholder}
+                  invalidMessage={i18n.formFields.userName.validation.emptyValue}
+                  minLen={i18n.formFields.userName.validation.minLen}
+                />
 
                 <InputSecondName
-                    value={this.state.userSecondName}
-                    onValidate={isValid => this.handleValidate("userSecondName", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.userSecondName.label}
-                    placeholder={i18n.formFields.userSecondName.placeholder}
-                    invalidMessage={i18n.formFields.userSecondName.validation.emptyValue}
-                    minLen={i18n.formFields.userSecondName.validation.minLen}
-                  />
+                  value={this.state.userSecondName}
+                  onValidate={isValid => this.handleValidate("userSecondName", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.userSecondName.label}
+                  placeholder={i18n.formFields.userSecondName.placeholder}
+                  invalidMessage={i18n.formFields.userSecondName.validation.emptyValue}
+                  minLen={i18n.formFields.userSecondName.validation.minLen}
+                />
 
                 <InputUserSurname
-                    value={this.state.userSurname}
-                    onValidate={isValid => this.handleValidate("userSurname", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.userSurname.label}
-                    placeholder={i18n.formFields.userSurname.placeholder}
-                    invalidMessage={i18n.formFields.userSurname.validation.emptyValue}
-                    minLen={i18n.formFields.userSurname.validation.minLen}
-                  />
+                  value={this.state.userSurname}
+                  onValidate={isValid => this.handleValidate("userSurname", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.userSurname.label}
+                  placeholder={i18n.formFields.userSurname.placeholder}
+                  invalidMessage={i18n.formFields.userSurname.validation.emptyValue}
+                  minLen={i18n.formFields.userSurname.validation.minLen}
+                />
 
                 <InputEmail
-                    value={this.state.email}
-                    onValidate={isValid => this.handleValidate("email", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.email.label}
-                    placeholder={i18n.formFields.email.placeholder}
-                    invalidMessage={i18n.formFields.email.validation.emptyValue}
-                  />
-                
+                  value={this.state.email}
+                  onValidate={isValid => this.handleValidate("email", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.email.label}
+                  placeholder={i18n.formFields.email.placeholder}
+                  invalidMessage={i18n.formFields.email.validation.emptyValue}
+                />
+
                 <h5 className="mb-3 mt-5" >{i18n.organizationHeader}</h5>
 
                 <InputCategory
@@ -260,7 +259,7 @@ class RegForm extends Component {
 
                 <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>
 
-                <InputFullname
+                  <InputFullname
                     value={this.state.fullname}
                     onValidate={isValid => this.handleValidate("fullname", isValid)}
                     onChange={this.handleChanges}
@@ -270,7 +269,7 @@ class RegForm extends Component {
                     minLen={i18n.formFields.fullName.validation.minLen}
                   />
 
-                <InputShortname
+                  <InputShortname
                     value={this.state.shortName}
                     onValidate={isValid => this.handleValidate("shortName", isValid)}
                     onChange={this.handleChanges}
@@ -280,100 +279,101 @@ class RegForm extends Component {
                     minLen={i18n.formFields.shortName.validation.minLen}
                   />
 
-                <div id="resident-info" className={this.state.category ? 'hidden' : ''}>
+                  <div id="resident-info" className={this.state.category ? 'hidden' : ''}>
 
-                  <InputInn
-                    value={this.state.inn}
-                    onValidate={isValid => this.handleValidate("inn", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.inn.label}
-                    placeholder={i18n.formFields.inn.placeholder}
-                    invalidMessage={i18n.formFields.inn.validation.emptyValue}
-                    minLen={i18n.formFields.inn.validation.minLen}
-                    maxLen={i18n.formFields.inn.validation.maxLen}
-                  />
+                    <InputInn
+                      value={this.state.inn}
+                      onValidate={isValid => this.handleValidate("inn", isValid)}
+                      onChange={this.handleChanges}
+                      label={i18n.formFields.inn.label}
+                      placeholder={i18n.formFields.inn.placeholder}
+                      invalidMessage={i18n.formFields.inn.validation.emptyValue}
+                      minLen={i18n.formFields.inn.validation.minLen}
+                      maxLen={i18n.formFields.inn.validation.maxLen}
+                    />
 
-                  <InputKpp
-                    value={this.state.kpp}
-                    onValidate={isValid => this.handleValidate("kpp", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.kpp.label}
-                    placeholder={i18n.formFields.kpp.placeholder}
-                    invalidMessage={i18n.formFields.kpp.validation.emptyValue}
-                    minLen={i18n.formFields.kpp.validation.minLen}
-                    maxLen={i18n.formFields.kpp.validation.maxLen}
-                  />
+                    <InputKpp
+                      value={this.state.kpp}
+                      onValidate={isValid => this.handleValidate("kpp", isValid)}
+                      onChange={this.handleChanges}
+                      label={i18n.formFields.kpp.label}
+                      placeholder={i18n.formFields.kpp.placeholder}
+                      invalidMessage={i18n.formFields.kpp.validation.emptyValue}
+                      minLen={i18n.formFields.kpp.validation.minLen}
+                      maxLen={i18n.formFields.kpp.validation.maxLen}
+                    />
 
-                  <InputOktmo
-                    value={this.state.oktmo}
-                    onValidate={isValid => this.handleValidate("oktmo", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.oktmo.label}
-                    placeholder={i18n.formFields.oktmo.placeholder}
-                    invalidMessage={i18n.formFields.oktmo.validation.emptyValue}
-                    minLen={i18n.formFields.oktmo.validation.minLen}
-                    maxLen={i18n.formFields.oktmo.validation.maxLen}
-                  />
+                    <InputOktmo
+                      value={this.state.oktmo}
+                      onValidate={isValid => this.handleValidate("oktmo", isValid)}
+                      onChange={this.handleChanges}
+                      label={i18n.formFields.oktmo.label}
+                      placeholder={i18n.formFields.oktmo.placeholder}
+                      invalidMessage={i18n.formFields.oktmo.validation.emptyValue}
+                      minLen={i18n.formFields.oktmo.validation.minLen}
+                      maxLen={i18n.formFields.oktmo.validation.maxLen}
+                    />
 
-                  <InputOgrn
-                    value={this.state.ogrn}
-                    onValidate={isValid => this.handleValidate("ogrn", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.ogrn.label}
-                    placeholder={i18n.formFields.ogrn.placeholder}
-                    invalidMessage={i18n.formFields.ogrn.validation.emptyValue}
-                    minLen={i18n.formFields.ogrn.validation.minLen}
-                    maxLen={i18n.formFields.ogrn.validation.maxLen}
-                  />
+                    <InputOgrn
+                      value={this.state.ogrn}
+                      onValidate={isValid => this.handleValidate("ogrn", isValid)}
+                      onChange={this.handleChanges}
+                      label={i18n.formFields.ogrn.label}
+                      placeholder={i18n.formFields.ogrn.placeholder}
+                      invalidMessage={i18n.formFields.ogrn.validation.emptyValue}
+                      minLen={i18n.formFields.ogrn.validation.minLen}
+                      maxLen={i18n.formFields.ogrn.validation.maxLen}
+                    />
 
-                </div>
+                  </div> 
+                  {/* resident-info */}
 
-                <div id="no-resident-info" className={this.state.resident ? 'hidden' : ''}>
-
+                  <div id="no-resident-info" className={this.state.category ? '' : 'hidden'}>
                   <InputRegNum
-                    value={this.state.regNum}
-                    onValidate={isValid => this.handleValidate("regNum", isValid)}
+                      value={this.state.regNum}
+                      onValidate={isValid => this.handleValidate("regNum", isValid)}
+                      onChange={this.handleChanges}
+                      label={i18n.formFields.regNum.label}
+                      placeholder={i18n.formFields.regNum.placeholder}
+                      invalidMessage={i18n.formFields.regNum.validation.emptyValue}
+                      minLen={i18n.formFields.regNum.validation.minLen}
+                    />
+                </div>
+
+                  <InputPhoneOrg
+                    value={this.state.phoneOrg}
+                    onValidate={isValid => this.handleValidate("phoneOrg", isValid)}
                     onChange={this.handleChanges}
-                    label={i18n.formFields.regNum.label}
-                    placeholder={i18n.formFields.regNum.placeholder}
-                    invalidMessage={i18n.formFields.regNum.validation.emptyValue}
-                    minLen={i18n.formFields.regNum.validation.minLen}
+                    label={i18n.formFields.phoneOrg.label}
+                    placeholder={i18n.formFields.phoneOrg.placeholder}
+                    invalidMessage={i18n.formFields.phoneOrg.validation.emptyValue}
+                    minLen={i18n.formFields.phoneOrg.validation.minLen}
                   />
-                </div>
 
-                <InputPhoneOrg
-                  value={this.state.phoneOrg}
-                  onValidate={isValid => this.handleValidate("phoneOrg", isValid)}
-                  onChange={this.handleChanges}
-                  label={i18n.formFields.phoneOrg.label}
-                  placeholder={i18n.formFields.phoneOrg.placeholder}
-                  invalidMessage={i18n.formFields.phoneOrg.validation.emptyValue}
-                  minLen={i18n.formFields.phoneOrg.validation.minLen}
-                />
-
-                <InputEmailOrg
-                  value={this.state.emailOrg}
-                  onValidate={isValid => this.handleValidate("emailOrg", isValid)}
-                  onChange={this.handleChanges}
-                  label={i18n.formFields.emailOrg.label}
-                  placeholder={i18n.formFields.emailOrg.placeholder}
-                  invalidMessage={i18n.formFields.emailOrg.validation.emptyValue}
-                />
+                  <InputEmailOrg
+                    value={this.state.emailOrg}
+                    onValidate={isValid => this.handleValidate("emailOrg", isValid)}
+                    onChange={this.handleChanges}
+                    label={i18n.formFields.emailOrg.label}
+                    placeholder={i18n.formFields.emailOrg.placeholder}
+                    invalidMessage={i18n.formFields.emailOrg.validation.emptyValue}
+                  />
 
                 </div>
+                {/* if-no-token */}
 
                 <InputToken
-                    value={this.state.token}
-                    required={this.state.tokenReg}
-                    shouldHide={!this.state.tokenReg}
-                    onValidate={isValid => this.handleValidate("token", isValid)}
-                    onChange={this.handleChanges}
-                    label={i18n.formFields.token.label}
-                    placeholder={i18n.formFields.token.placeholder}
-                    invalidMessage={i18n.formFields.token.validation.emptyValue}
-                    minLen={i18n.formFields.token.validation.minLen}
-                    maxLen={i18n.formFields.token.validation.maxLen}
-                  />
+                  value={this.state.token}
+                  required={this.state.tokenReg}
+                  shouldHide={!this.state.tokenReg}
+                  onValidate={isValid => this.handleValidate("token", isValid)}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.token.label}
+                  placeholder={i18n.formFields.token.placeholder}
+                  invalidMessage={i18n.formFields.token.validation.emptyValue}
+                  minLen={i18n.formFields.token.validation.minLen}
+                  maxLen={i18n.formFields.token.validation.maxLen}
+                />
 
                 {/* <TextareaMessage
                   value={this.state.message}
@@ -416,7 +416,7 @@ class RegForm extends Component {
                 />
 
                 <InputSendBtn caption={i18n.formFields.btnSend.caption} />
-                
+
               </CardBody>
             </Card>
 
