@@ -6,11 +6,16 @@ class Inputcheckpersdata extends InputComponent {
   handleChange = e => {
     // fire the form change event
     this.props.onChange(e);
-    this.validateValue();
+    this.validateValue(e.target);
   };
 
-  validateValue = () => {
-    this.props.onValidate(true);
+  validateValue = input => {
+    const checked = input.checked;
+    if (checked ){
+      this.props.onValidate(true);
+    } else {
+      this.props.onValidate(false);
+    }
   };
 
   handleModalToggle = () => {
@@ -30,6 +35,7 @@ class Inputcheckpersdata extends InputComponent {
                 value={item.id}
                 name="checkpersdata"
                 type="checkbox"
+                checked={this.props.value}
                 className="form-control custom-control-input"
                 onChange={this.handleChange}
                 required
