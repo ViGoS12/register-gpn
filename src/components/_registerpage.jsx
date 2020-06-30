@@ -66,7 +66,7 @@ class RegisterPage extends Component {
       console.log("success", oResponse.response.requestCategory);
       this.setState({
         status: "success",
-        headtext: this.props.i18n.success[oResponse.response.requestCategory]
+        headtext: oResponse.response.requestCategory
       });
     }
   };
