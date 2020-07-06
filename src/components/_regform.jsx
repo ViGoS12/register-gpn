@@ -311,7 +311,7 @@ class RegForm extends Component {
                       maxLen={i18n.formFields.kpp.validation.maxLen}
                     />
 
-                    <InputOktmo
+                    {/* <InputOktmo
                       value={this.state.oktmo}
                       onValidate={isValid => this.handleValidate("oktmo", isValid)}
                       onChange={this.handleChanges}
@@ -320,9 +320,9 @@ class RegForm extends Component {
                       invalidMessage={i18n.formFields.oktmo.validation.emptyValue}
                       minLen={i18n.formFields.oktmo.validation.minLen}
                       maxLen={i18n.formFields.oktmo.validation.maxLen}
-                    />
+                    /> */}
 
-                    <InputOgrn
+                    {/* <InputOgrn
                       value={this.state.ogrn}
                       onValidate={isValid => this.handleValidate("ogrn", isValid)}
                       onChange={this.handleChanges}
@@ -331,7 +331,7 @@ class RegForm extends Component {
                       invalidMessage={i18n.formFields.ogrn.validation.emptyValue}
                       minLen={i18n.formFields.ogrn.validation.minLen}
                       maxLen={i18n.formFields.ogrn.validation.maxLen}
-                    />
+                    /> */}
 
                   </div> 
                   {/* resident-info */}

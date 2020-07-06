@@ -43,8 +43,8 @@ class Backend {
     //const egrulEncoded = encodeURI(oData.get("egrul"));
     const innEncoded = encodeURI(oData.get("inn"));
     const kppEncoded = encodeURI(oData.get("kpp"));
-    const ogrnEncoded = encodeURI(oData.get("ogrn"));
-    const oktmoEncoded = encodeURI(oData.get("oktmo"));
+    //const ogrnEncoded = encodeURI(oData.get("ogrn"));
+    //const oktmoEncoded = encodeURI(oData.get("oktmo"));
     const shortNameEncoded = encodeURI(oData.get("shortName"));
     const tokenEncoded = encodeURI(oData.get("token"));
     const userNameEncoded = encodeURI(oData.get("userName"));
@@ -64,8 +64,8 @@ class Backend {
     //oData.append("egrulEncoded", egrulEncoded);
     oData.append("innEncoded", innEncoded);
     oData.append("kppEncoded", kppEncoded);
-    oData.append("ogrnEncoded", ogrnEncoded);
-    oData.append("oktmoEncoded", oktmoEncoded);
+    //oData.append("ogrnEncoded", ogrnEncoded);
+    //oData.append("oktmoEncoded", oktmoEncoded);
     oData.append("shortNameEncoded", shortNameEncoded);
     oData.append("tokenEncoded", tokenEncoded);
     oData.append("userNameEncoded", userNameEncoded);
