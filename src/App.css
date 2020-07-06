@@ -104,3 +104,12 @@ input:not(:focus):valid ~ .floating-label{
 .hidden{
   display: none;
 }
+
+.modal-body {
+  padding: 2rem !important;
+}
+
+.modal-footer {
+  padding-top: 0 !important;
+  border: 0 !important;
+}

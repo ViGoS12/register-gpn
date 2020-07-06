@@ -19,7 +19,7 @@ class Inputcheckpersdata extends InputComponent {
   };
 
   handleModalToggle = () => {
-    this.props.handleModal();
+    this.props.handleModal(this.props.modalTitle, this.props.modalText);
   };
 
   render() {
@@ -45,7 +45,7 @@ class Inputcheckpersdata extends InputComponent {
                 {item.text}
               </label>
               {". "}
-              <a href="javascript:void(null);" onClick={this.handleModalToggle}>Подробнее</a>
+          <a href="javascript:void(null);" onClick={this.handleModalToggle}>{this.props.aboutLink}</a>
 
               {this.props.items.length - 1 === Number.parseInt(item.id) && (
                 <div className="invalid-feedback" stylename="width: 100%">

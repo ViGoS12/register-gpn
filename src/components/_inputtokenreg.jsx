@@ -1,7 +1,8 @@
 import React from "react";
 import InputComponent from "./inputcomponent";
+//import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 
-class InputTokenReg extends InputComponent {
+class InputTokenRegCheckbox extends InputComponent {
   handleChange = e => {
     // fire the form change event
     this.props.onChange(e);
@@ -11,6 +12,10 @@ class InputTokenReg extends InputComponent {
   // validateValue = () => {
   //   this.props.onValidate(true);
   // };
+
+  handleModalToggle = () => {
+    this.props.handleModal(this.props.modalTitle,this.props.modalText);
+  };
 
   render() {
     return (
@@ -30,6 +35,8 @@ class InputTokenReg extends InputComponent {
                 {this.props.label}
               </label>
 
+              {". "}
+              <a href="javascript:void(null);" onClick={this.handleModalToggle}>{this.props.aboutLink}</a>
     
             </div>
           
@@ -42,4 +49,4 @@ class InputTokenReg extends InputComponent {
   }
 }
 
-export default InputTokenReg;
+export default InputTokenRegCheckbox;

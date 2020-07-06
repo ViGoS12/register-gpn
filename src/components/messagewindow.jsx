@@ -31,7 +31,7 @@ class MessageWindow extends Component {
           <ModalHeader toggle={this.handleModalToggle}>{this.props.title}</ModalHeader>
           <ModalBody>
             {/* {this.props.textPD} */}
-            <div dangerouslySetInnerHTML={{ __html: this.props.textPD }} />
+            <div dangerouslySetInnerHTML={{ __html: this.props.text }} />
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.handleModalToggle}>

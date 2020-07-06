@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Spinner } from "reactstrap";
+import { Spinner, Alert, Button } from "reactstrap";
 //import FeedbackForm from "./feedbackform";
 import RegForm from "./_regform";
 import Backend from "./backend";
 import ProgressIndicator from "./progressindicator";
-import { Alert, Button } from "reactstrap";
 //import { useHistory } from "react-router-dom";
 
 class RegisterPage extends Component {
@@ -15,7 +14,10 @@ class RegisterPage extends Component {
       status: undefined,
       progress: undefined,
       httpError: undefined,
-      tokenVerified: undefined
+      tokenVerified: undefined,
+      alertText: undefined,
+      alertColor: undefined,
+      alertVisible: false
     }; 
   }
 
@@ -60,13 +62,17 @@ class RegisterPage extends Component {
     if (oResponse.response.exceptionMessage) {
       this.setState({
         status: "error",
-        headtext: oResponse.response.exceptionMessage
+        alertText: oResponse.response.exceptionMessage,
+        alertColor: "danger",
+        alertVisible: true
       });
     } else {
       console.log("success", oResponse.response.requestCategory);
       this.setState({
         status: "success",
-        headtext: oResponse.response.requestCategory
+        alertText: oResponse.response.requestCategory,
+        alertColor: "info",
+        alertVisible: true
       });
     }
   };
@@ -79,7 +85,9 @@ class RegisterPage extends Component {
       this.setState({
         status: "progress",
         progress: percentage,
-        headtext: this.props.i18n.progressIndicator.caption
+        httpError: "",
+        alertVisible: false
+        //headtext: this.props.i18n.progressIndicator.caption
       });
     }
   };
@@ -88,7 +96,9 @@ class RegisterPage extends Component {
     this.setState({
       status: "error",
       httpError: httpError,
-      headtext: this.props.i18n.errors[httpError]
+      alertText: this.props.i18n.errors[httpError],
+      alertColor: "danger",
+      alertVisible: true
     });
   };
 
@@ -222,13 +232,23 @@ class RegisterPage extends Component {
     );
   };
 
+  // alert dismiss
+  onDismissAlert = () => {
+    this.setState({
+      alertVisible: !this.state.alertVisible
+    });
+  }
+
   render() {
     const i18n = this.props.i18n;
     let content = undefined;
 
     switch (this.state.status) {
       case "error":
+        content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
+        break;
       case "success":
+        content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
         break;
       case "oldbrowser":
         content = this.oldBrowser();
@@ -237,9 +257,11 @@ class RegisterPage extends Component {
         content = <ProgressIndicator value={this.state.progress} />;
         break;
       case "tokenFromEmailValid":
+        // переход по ссылке проверки токена - вывод страницы с сообщением
         content = this.tokenFromEmailValidPage();
         break;
       case "tokenFromEmailNotValid":
+        // переход по ссылке проверки токена - вывод страницы с сообщением
         content = this.tokenFromEmailNotValidPage();
         break;
 
@@ -262,8 +284,13 @@ class RegisterPage extends Component {
           />
           <h2>{i18n.caption}</h2>
           <p className="lead">{this.state.headtext}</p>
+          <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
+              <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >Ошибка {this.state.httpError}</h4>
+              {this.state.alertText}
+          </Alert>
         </div>
         {content}
+
       </div>
     );
   }

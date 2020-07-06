@@ -10,7 +10,7 @@ import InputInn from "./_inputinn";
 import InputOgrn from "./_inputogrn";
 import InputOktmo from "./_inputoktmo";
 //import InputEgrul from "./_inputegrul";
-import InputTokenReg from "./_inputtokenreg";
+import InputTokenRegCheckbox from "./_inputtokenreg";
 import InputToken from "./_inputtoken";
 import InputEmailOrg from "./_inputemailorg";
 import InputPhoneOrg from "./_inputphoneorg";
@@ -82,6 +82,7 @@ class RegForm extends Component {
     }
   };
 
+  // handle input states
   handleChanges = e => {
     const target = e.target;
     const name = target.name;
@@ -95,9 +96,12 @@ class RegForm extends Component {
     this.form.current.classList.remove("was-validated");
   };
 
-  handleModal = () => {
+  //modal show-hide
+  handleModal = (title, text) => {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      title: title,
+      text: text
     });
   };
 
@@ -251,10 +255,14 @@ class RegForm extends Component {
                   infoMessage={i18n.formFields.category.infoMessage}
                 />
 
-                <InputTokenReg
+                <InputTokenRegCheckbox
                   value={this.state.tokenReg}
                   onChange={this.handleChanges}
                   label={i18n.formFields.tokenReg.label}
+                  handleModal={this.handleModal}
+                  modalTitle={i18n.formFields.tokenReg.modal.title}
+                  modalText={i18n.formFields.tokenReg.modal.text}
+                  aboutLink={i18n.formFields.tokenReg.aboutLink}
                 />
 
                 <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>
@@ -395,14 +403,17 @@ class RegForm extends Component {
                   invalidMessage={i18n.formFields.checkpersdata.validation.emptyValue}
                   infoMessage={i18n.formFields.checkpersdata.infoMessage}
                   handleModal={this.handleModal}
+                  modalText={i18n.formFields.checkpersdata.textPD}
+                  modalTitle={i18n.formFields.checkpersdata.placeholder}
+                  aboutLink={i18n.formFields.checkpersdata.aboutLink}
                 />
 
                 <MessageWindow
                   className="classModal"
                   modal={this.state.modal}
-                  textPD={i18n.formFields.checkpersdata.textPD}
                   handleModal={this.handleModal}
-                  title={i18n.formFields.checkpersdata.placeholder}
+                  title={this.state.title}
+                  text={this.state.text}
                 />
 
                 <InputCaptcha
