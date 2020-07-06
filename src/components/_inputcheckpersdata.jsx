@@ -11,7 +11,7 @@ class Inputcheckpersdata extends InputComponent {
 
   validateValue = input => {
     const checked = input.checked;
-    if (checked ){
+    if (checked) {
       this.props.onValidate(true);
     } else {
       this.props.onValidate(false);
@@ -45,7 +45,7 @@ class Inputcheckpersdata extends InputComponent {
                 {item.text}
               </label>
               {". "}
-          <a href="javascript:void(null);" onClick={this.handleModalToggle}>{this.props.aboutLink}</a>
+              <a href="javascript:void(null);" onClick={this.handleModalToggle}>{this.props.aboutLink}</a>
 
               {this.props.items.length - 1 === Number.parseInt(item.id) && (
                 <div className="invalid-feedback" stylename="width: 100%">
