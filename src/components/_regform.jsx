@@ -7,8 +7,8 @@ import InputFullname from "./_inputfullname";
 import InputShortname from "./_inputshortname";
 import InputKpp from "./_inputkpp";
 import InputInn from "./_inputinn";
-import InputOgrn from "./_inputogrn";
-import InputOktmo from "./_inputoktmo";
+//import InputOgrn from "./_inputogrn";
+//import InputOktmo from "./_inputoktmo";
 //import InputEgrul from "./_inputegrul";
 import InputTokenRegCheckbox from "./_inputtokenreg";
 import InputToken from "./_inputtoken";
@@ -45,8 +45,8 @@ class RegForm extends Component {
     shortName: "",
     kpp: "",
     inn: "",
-    ogrn: "",
-    oktmo: "",
+    //ogrn: "",
+    //oktmo: "",
     emailOrg: "",
     phoneOrg: "",
     regNum: "",
@@ -66,8 +66,8 @@ class RegForm extends Component {
       shortName: false,
       kpp: false,
       inn: false,
-      ogrn: false,
-      oktmo: false,
+      //ogrn: false,
+      //oktmo: false,
       //engName: false,
       //adress: false,
       //adressEng: false
@@ -150,8 +150,8 @@ class RegForm extends Component {
             this.state.validate.shortName &&
             this.state.validate.kpp &&
             this.state.validate.inn &&
-            this.state.validate.ogrn &&
-            this.state.validate.oktmo &&
+            //this.state.validate.ogrn &&
+            //this.state.validate.oktmo &&
             this.state.validate.phoneOrg &&
             this.state.validate.emailOrg
           ) {
