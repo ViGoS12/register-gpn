@@ -17,7 +17,8 @@ class RegisterPage extends Component {
       tokenVerified: undefined,
       alertText: undefined,
       alertColor: undefined,
-      alertVisible: false
+      alertVisible: false,
+      hasError: undefined
     }; 
   }
 
@@ -68,12 +69,23 @@ class RegisterPage extends Component {
       });
     } else {
       console.log("success", oResponse.response.requestCategory);
-      this.setState({
-        status: "success",
-        alertText: oResponse.response.requestCategory,
-        alertColor: "info",
-        alertVisible: true
-      });
+      if (oResponse.response.hasError) {
+        this.setState({
+          status: "error",
+          alertText: oResponse.response.requestCategory,
+          alertColor: "danger",
+          alertVisible: true,
+          hasError: oResponse.response.hasError // 0 - 1
+        });
+      } else {
+        this.setState({
+          status: "success",
+          alertText: oResponse.response.requestCategory,
+          alertColor: "success",
+          alertVisible: true,
+          hasError: oResponse.response.hasError // 0 - 1
+        });
+      }
     }
   };
 
@@ -98,7 +110,8 @@ class RegisterPage extends Component {
       httpError: httpError,
       alertText: this.props.i18n.errors[httpError],
       alertColor: "danger",
-      alertVisible: true
+      alertVisible: true,
+      //hasError: 1
     });
   };
 
@@ -286,7 +299,7 @@ class RegisterPage extends Component {
           <p className="lead">{this.state.headtext}</p>
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
               <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >Ошибка {this.state.httpError}</h4>
-              {this.state.alertText}
+              <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
           </Alert>
         </div>
         {content}
