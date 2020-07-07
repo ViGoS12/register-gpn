@@ -80,7 +80,7 @@ class RegisterPage extends Component {
       } else {
         this.setState({
           status: "success",
-          alertText: oResponse.response.requestCategory,
+          headtext: oResponse.response.requestCategory,
           alertColor: "success",
           alertVisible: true,
           hasError: oResponse.response.hasError // 0 - 1
@@ -261,7 +261,7 @@ class RegisterPage extends Component {
         content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
         break;
       case "success":
-        content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
+        //content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
         break;
       case "oldbrowser":
         content = this.oldBrowser();
