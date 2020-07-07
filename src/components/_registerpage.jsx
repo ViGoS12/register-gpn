@@ -82,7 +82,7 @@ class RegisterPage extends Component {
           status: "success",
           headtext: oResponse.response.requestCategory,
           alertColor: "success",
-          alertVisible: true,
+          alertVisible: false,
           hasError: oResponse.response.hasError // 0 - 1
         });
       }
@@ -202,20 +202,18 @@ class RegisterPage extends Component {
     }
   };
 
-  tokenFromEmailValidPage() {
-    // let history = useHistory();
+  handleClickBack() {
+    window.location.assign("/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/");
+  }
 
-    function handleClick() {
-      //history.push("/");
-      window.location.assign("/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/");
-    }
+  tokenFromEmailValidPage() {
     return (
       <React.Fragment>
         <p className="LinkFromEmailPage">
           <Alert color="success">
             {this.props.i18n.tokenFromEmailValidPage.success}
           </Alert>
-          <Button outline color="primary" onClick={handleClick}>Вернуться к форме регистрации</Button>
+          <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>
         </p>
         {/* <p className="LinkFromEmailPage">
           Your account has been succesfully validated.
@@ -225,18 +223,13 @@ class RegisterPage extends Component {
   };
 
   tokenFromEmailNotValidPage() {
-    // let history = useHistory();
-    function handleClick() {
-      //history.push("/");
-      window.location.assign("/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/");
-    }
     return (
       <React.Fragment>
         <p className="LinkFromEmailPage">
           <Alert color="danger">
             {this.props.i18n.tokenFromEmailValidPage.error}
           </Alert>
-          <Button outline color="primary" onClick={handleClick}>Вернуться к форме регистрации</Button>
+          <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>
         </p>
         {/* <p className="LinkFromEmailPage">
           Your account has been not validated.
@@ -262,6 +255,7 @@ class RegisterPage extends Component {
         break;
       case "success":
         //content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
+        content = <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>;
         break;
       case "oldbrowser":
         content = this.oldBrowser();
@@ -296,7 +290,7 @@ class RegisterPage extends Component {
             alt=""
           />
           <h2>{i18n.caption}</h2>
-          <p className="lead">{this.state.headtext}</p>
+          <div className="lead" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
               <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >Ошибка {this.state.httpError}</h4>
               <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
