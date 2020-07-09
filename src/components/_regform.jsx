@@ -197,13 +197,13 @@ class RegForm extends Component {
             }
             invalidFilesCount={i18n.attachmentList.validation.maxFiles}
           /> */}
-          <Col md={{ size: 12, order: 1 }}>
+          <Col md={{ size: 12, order: 1 }} className="mt-3">
 
             <Card body style={{ marginBottom: '1rem' }} >
 
               <CardBody>
 
-                <h5 className="mb-3" >{i18n.userHeader}</h5>
+                <h5 className="mb-3">{i18n.userHeader}</h5>
 
                 <InputUserName
                   value={this.state.userName}

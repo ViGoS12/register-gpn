@@ -119,8 +119,8 @@ class Backend {
       if (xhr.status !== 200) {
         onError(xhr.status);
       } else {
-        onResponse(xhr.responseText);
-        //onResponse(JSON.parse(xhr.responseText));
+        //onResponse(xhr.responseText);
+        onResponse(JSON.parse(xhr.responseText));
       }
     };
   }

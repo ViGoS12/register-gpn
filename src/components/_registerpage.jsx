@@ -19,8 +19,11 @@ class RegisterPage extends Component {
       alertColor: undefined,
       alertVisible: false,
       hasError: undefined
-    }; 
+    };
+    this.alertRef = React.createRef()
   }
+
+  scrollToMyRef = (myRef) => window.scrollTo(0, myRef.current.offsetTop)  
 
   componentDidMount() {
     // link with token from email
@@ -62,25 +65,32 @@ class RegisterPage extends Component {
 
     if (oResponse.response.exceptionMessage) {
       this.setState({
-        status: "error",
+        status: "RegForm",
+        headtext: "",
         alertText: oResponse.response.exceptionMessage,
         alertColor: "danger",
         alertVisible: true
       });
+      this.scrollToMyRef(this.alertRef);
     } else {
-      console.log("success", oResponse.response.requestCategory);
+      console.log("Ответ сервреа получен ", oResponse.response.requestCategory);
       if (oResponse.response.hasError) {
+        console.log("Получено сообщение об ошибке с сервера ", oResponse.response.hasError);
         this.setState({
-          status: "error",
+          status: "RegForm",
+          headtext: "",
           alertText: oResponse.response.requestCategory,
           alertColor: "danger",
           alertVisible: true,
           hasError: oResponse.response.hasError // 0 - 1
         });
+        this.scrollToMyRef(this.alertRef);
       } else {
+        console.log("Получено сообщение об успешной регистрации сервера ", oResponse.response.requestCategory);
         this.setState({
           status: "success",
           headtext: oResponse.response.requestCategory,
+          alertText: "",
           alertColor: "success",
           alertVisible: false,
           hasError: oResponse.response.hasError // 0 - 1
@@ -95,7 +105,7 @@ class RegisterPage extends Component {
       let percentage = Math.round((event.loaded * 100) / event.total);
 
       this.setState({
-        status: "progress",
+        status: "RegForm",
         progress: percentage,
         httpError: "",
         alertVisible: false
@@ -106,13 +116,15 @@ class RegisterPage extends Component {
 
   handleError = httpError => {
     this.setState({
-      status: "error",
+      status: "RegForm",
       httpError: httpError,
+      //headtext: "",
       alertText: this.props.i18n.errors[httpError],
       alertColor: "danger",
       alertVisible: true,
       //hasError: 1
     });
+    this.scrollToMyRef(this.alertRef);
   };
 
   oldBrowser() {
@@ -142,62 +154,38 @@ class RegisterPage extends Component {
       this.handleError
     );
 
-    /// GET
-    // const backend = new Backend();
-    // this.setState({ 
-    //     status: "progress"});
-    // const xhr = backend.createXHR();
-
-    // xhr.open(
-    //   "GET",
-    //   "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/verify?token=" +
-    //     sToken,
-    //   true
-    // );
-
-    // xhr.send();
-    // xhr.onreadystatechange = () => {
-    //   //let result = false;
-    //   console.log(xhr.status);
-    //   if (xhr.readyState !== 4) {
-    //     return false;
-    //   }
-    //   if (xhr.status !== 200) {
-    //     const oResult = JSON.parse(xhr.responseText);
-    //     console.log(oResult);
-    //       /// добавить состояние - ошибка
-    //       this.setState({ status: "error" });
-    //       ////
-    //   } else {
-    //     const oResult = JSON.parse(xhr.responseText);
-    //     console.log(oResult);
-    //     console.log("tokenValid= ", oResult.response.tokenValid);
-
-    //     if (oResult.response.tokenValid === true) {
-    //       this.setState({ status: "tokenFromEmailValid" });
-    //     } else {
-    //       this.setState({ status: "tokenFromEmailNotValid" });
-    //     }
-    //   }
-    // };
   };
 
   handleResponseTokenVerify = oResponse => {
     console.log("handleResponseVerify", oResponse);
     //JSON.parse(oResponse);
+      // {"response":{
+      //   "captchaPassed":true,
+      //   "requestCategory":"<p>Ссылка для перехода недействительна. Необходимо выполнить повторную регистрацию на ЭТП «Газпромнефть»<\/p> \n ",
+      //   "verify":"NoVerified",
+      //   "hasError":true}}
 
-    if (oResponse === "NoVerified") {
+    if (oResponse.response.verify === "NoVerified") {
       this.setState({ 
-        status: "tokenFromEmailNotValid"
+        status: "tokenFromEmailNotValid",
+        alertText: oResponse.response.requestCategory,
+        alertColor: "error",
+        alertVisible: true,
+        hasError: oResponse.response.hasError
       });
-    } else if (oResponse === "Verified"){
+    } else if (oResponse.response.verify === "Verified"){
       this.setState({ 
-        status: "tokenFromEmailValid"
+        status: "tokenFromEmailValid",
+        alertText: oResponse.response.requestCategory,
+        alertColor: "success",
+        alertVisible: true,
+        hasError: oResponse.response.hasError
       });
     } else {
       this.setState({ 
         status: "error",
-        headtext: "Error in token verified, unknown response"
+        alertText: "Error in token verified, unknown response",
+        alertVisible: true,
       });
     }
   };
@@ -205,38 +193,6 @@ class RegisterPage extends Component {
   handleClickBack() {
     window.location.assign("/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/");
   }
-
-  tokenFromEmailValidPage() {
-    return (
-      <React.Fragment>
-        <p className="LinkFromEmailPage">
-          <Alert color="success">
-            {this.props.i18n.tokenFromEmailValidPage.success}
-          </Alert>
-          <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>
-        </p>
-        {/* <p className="LinkFromEmailPage">
-          Your account has been succesfully validated.
-        </p> */}
-      </React.Fragment>
-    );
-  };
-
-  tokenFromEmailNotValidPage() {
-    return (
-      <React.Fragment>
-        <p className="LinkFromEmailPage">
-          <Alert color="danger">
-            {this.props.i18n.tokenFromEmailValidPage.error}
-          </Alert>
-          <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>
-        </p>
-        {/* <p className="LinkFromEmailPage">
-          Your account has been not validated.
-        </p> */}
-      </React.Fragment>
-    );
-  };
 
   // alert dismiss
   onDismissAlert = () => {
@@ -251,7 +207,8 @@ class RegisterPage extends Component {
 
     switch (this.state.status) {
       case "error":
-        content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
+        //content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
+        content = <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>;
         break;
       case "success":
         //content = <RegForm i18n={i18n} onSubmit={this.handleSubmit}/>;
@@ -260,16 +217,16 @@ class RegisterPage extends Component {
       case "oldbrowser":
         content = this.oldBrowser();
         break;
-      case "progress":
-        content = <ProgressIndicator value={this.state.progress} />;
-        break;
+      // case "progress":
+      //   content = <ProgressIndicator value={this.state.progress} />;
+      //   break;
       case "tokenFromEmailValid":
         // переход по ссылке проверки токена - вывод страницы с сообщением
-        content = this.tokenFromEmailValidPage();
+        content = <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>;
         break;
       case "tokenFromEmailNotValid":
         // переход по ссылке проверки токена - вывод страницы с сообщением
-        content = this.tokenFromEmailNotValidPage();
+        content = <Button outline color="primary" onClick={this.handleClickBack}>Вернуться к форме регистрации</Button>;
         break;
 
       case "RegForm":
@@ -281,8 +238,8 @@ class RegisterPage extends Component {
     }
 
     return (
-      <div className="container">
-        <div className="pt-5">
+      <div className="container" ref={this.alertRef}>
+        <div className="pt-3">
           <img
             className="d-block ml-auto mr-0 mb-4"
             src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/regform/logo.png"
@@ -290,14 +247,16 @@ class RegisterPage extends Component {
             alt=""
           />
           <h2>{i18n.caption}</h2>
-          <div className="lead" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
+          <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
               <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >Ошибка {this.state.httpError}</h4>
               <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
           </Alert>
+          <div className={this.state.progress < 100 ? 'pt-3 pb-3' : 'pt-3 pb-3 hidden'}>
+            <ProgressIndicator value={this.state.progress}/>
+          </div>
         </div>
         {content}
-
       </div>
     );
   }
