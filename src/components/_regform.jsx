@@ -122,7 +122,8 @@ class RegForm extends Component {
       this.state.validate.userSecondName &&
       this.state.validate.userSurname &&
       this.state.validate.email &&
-      this.state.validate.checkpersdata
+      this.state.validate.checkpersdata &&
+      this.state.validate.checkCode
     ) {
       if (this.state.tokenReg) {
         if (this.state.validate.token) {
@@ -168,6 +169,9 @@ class RegForm extends Component {
     // submit
     if (isValid) {
       this.props.onSubmit(e.target);
+      // captha disable
+      this.setState({checkCode: ""});
+      this.handleValidate ("checkCode", false);
     } else {
       e.target.classList.add("was-validated");
     }
