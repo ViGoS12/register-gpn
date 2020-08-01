@@ -18,7 +18,9 @@ class RegisterPage extends Component {
       alertText: undefined,
       alertColor: undefined,
       alertVisible: false,
-      hasError: undefined
+      hasError: undefined,
+
+      lang: props.lang
     };
     this.alertRef = React.createRef()
   }
@@ -125,6 +127,8 @@ class RegisterPage extends Component {
       //hasError: 1
     });
     this.scrollToMyRef(this.alertRef);
+    // refresh captcha here
+
   };
 
   oldBrowser() {
@@ -201,6 +205,14 @@ class RegisterPage extends Component {
     });
   }
 
+  changeLang() {
+    if (this.state.lang === "ru" ){
+      this.setState({ lang: "eng"});
+    } else {
+      this.setState({ lang: "ru"});
+    }
+  }
+
   render() {
     const i18n = this.props.i18n;
     let content = undefined;
@@ -245,7 +257,10 @@ class RegisterPage extends Component {
             src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/regform/logo.png"
             //src="../logo.png"
             alt=""
-          />
+          /> 
+          <div>
+            <a href="javascript:void(null);" onClick={this.changeLang}>{this.props.lang}</a>
+          </div>
           <h2>{i18n.caption}</h2>
           <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>

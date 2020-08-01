@@ -45,8 +45,12 @@ class Inputcheckpersdata extends InputComponent {
                 {item.text}
               </label>
               {". "}
-              <a href="javascript:void(null);" onClick={this.handleModalToggle}>{this.props.aboutLink}</a>
-
+              {/* <a href="javascript:void(null);" onClick={this.handleModalToggle}>{this.props.aboutLink}</a> */}
+              
+              
+              <a href="11111111111111111111111111" target="_blank">{this.props.aboutLink}</a>
+              
+              
               {this.props.items.length - 1 === Number.parseInt(item.id) && (
                 <div className="invalid-feedback" stylename="width: 100%">
                   {this.props.invalidMessage}
