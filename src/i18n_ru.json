@@ -181,6 +181,14 @@
         }
       },
 
+      "ip": {
+        "label": "ИП",
+        "infoMessage": "Являетесь ли вы ИП?",
+        "validation": { 
+          "emptyValue": "Являетесь ли вы ИП?" 
+        }
+      },
+
       "tokenReg": {
         "aboutLink": "О токене",
         "label": "Регистрация по токену",

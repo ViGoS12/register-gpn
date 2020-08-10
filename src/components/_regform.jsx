@@ -19,6 +19,7 @@ import InputUserName from "./_inputusername";
 import InputSecondName from "./_inputusersecondname";
 import InputUserSurname from "./_inputusershurname";
 import InputCategory from "./_inputcategory";
+import InputIP from "./_inputip";
 import Inputcheckpersdata from "./_inputcheckpersdata";
 import InputCaptcha from "./inputcaptcha";
 import MessageWindow from "./messagewindow";
@@ -31,6 +32,7 @@ class RegForm extends Component {
 
   state = {
     category: false,
+    ip: false,
     tokenReg: false,
     modal: false,
     token: "",
@@ -149,7 +151,7 @@ class RegForm extends Component {
           if (
             this.state.validate.fullname &&
             this.state.validate.shortName &&
-            this.state.validate.kpp &&
+            (this.state.ip || this.state.validate.kpp) &&
             this.state.validate.inn &&
             //this.state.validate.ogrn &&
             //this.state.validate.oktmo &&
@@ -259,6 +261,14 @@ class RegForm extends Component {
                   infoMessage={i18n.formFields.category.infoMessage}
                 />
 
+                <InputIP
+                  value={this.state.ip}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.ip.label}
+                  invalidMessage={i18n.formFields.ip.validation.emptyValue}
+                  infoMessage={i18n.formFields.ip.infoMessage}
+                />
+
                 <InputTokenRegCheckbox
                   value={this.state.tokenReg}
                   onChange={this.handleChanges}
@@ -304,16 +314,18 @@ class RegForm extends Component {
                       maxLen={i18n.formFields.inn.validation.maxLen}
                     />
 
-                    <InputKpp
-                      value={this.state.kpp}
-                      onValidate={isValid => this.handleValidate("kpp", isValid)}
-                      onChange={this.handleChanges}
-                      label={i18n.formFields.kpp.label}
-                      placeholder={i18n.formFields.kpp.placeholder}
-                      invalidMessage={i18n.formFields.kpp.validation.emptyValue}
-                      minLen={i18n.formFields.kpp.validation.minLen}
-                      maxLen={i18n.formFields.kpp.validation.maxLen}
-                    />
+                    <div className={this.state.ip ? '' : 'hidden'}>
+                      <InputKpp
+                        value={this.state.kpp}
+                        onValidate={isValid => this.handleValidate("kpp", isValid)}
+                        onChange={this.handleChanges}
+                        label={i18n.formFields.kpp.label}
+                        placeholder={i18n.formFields.kpp.placeholder}
+                        invalidMessage={i18n.formFields.kpp.validation.emptyValue}
+                        minLen={i18n.formFields.kpp.validation.minLen}
+                        maxLen={i18n.formFields.kpp.validation.maxLen}
+                      />
+                    </div>
 
                     {/* <InputOktmo
                       value={this.state.oktmo}
