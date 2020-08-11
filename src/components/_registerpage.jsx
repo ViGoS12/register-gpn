@@ -20,7 +20,7 @@ class RegisterPage extends Component {
       alertVisible: false,
       hasError: undefined,
 
-      lang: props.lang
+      lang: this.props.lang
     };
     this.alertRef = React.createRef()
   }
@@ -205,13 +205,28 @@ class RegisterPage extends Component {
     });
   }
 
-  changeLang() {
+  changeLang = () => {
     if (this.state.lang === "ru" ){
       this.setState({ lang: "eng"});
     } else {
       this.setState({ lang: "ru"});
     }
+    //updateI18n();
   }
+
+
+  updateI18n= () => {
+    
+      this.setState({ i18n: null });
+      this.backend.getI18n(
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/i18n?lang="+this.state.lang,
+        oI18n => {
+          this.setState({ i18n: oI18n });
+          document.title = oI18n.register.caption;
+        }
+      );
+  }
+
 
   render() {
     const i18n = this.props.i18n;
@@ -259,7 +274,7 @@ class RegisterPage extends Component {
             alt=""
           /> 
           <div>
-            <a href="javascript:void(null);" onClick={this.changeLang}>{this.props.lang}</a>
+            <a href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang}</a>
           </div>
           <h2>{i18n.caption}</h2>
           <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />

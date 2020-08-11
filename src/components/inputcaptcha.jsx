@@ -69,10 +69,11 @@ class InputCaptcha extends InputComponent {
               <img
                 id="captchaid"
                 alt=""
-                src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/captcha"
+                src={this.props.src}
                 className="gzpn-captcha-img"
                 onClick={this.handleImageClick}
               />
+              {/* src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/captcha" */}
             </div>
             <input
               type="text"

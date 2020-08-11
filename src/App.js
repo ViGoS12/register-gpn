@@ -38,10 +38,9 @@ class App extends Component {
   }
 
 
-
   render() {
     return this.state.i18n ? (
-      <RegisterPage i18n={this.state.i18n.register} lang={this.state.lang}/>
+      <RegisterPage i18n={this.state.i18n.register} lang={this.state.lang} />
     ) : (
       <Spinner color="dark" className="spinner" />
     );

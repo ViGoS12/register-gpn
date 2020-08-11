@@ -57,6 +57,7 @@ class RegForm extends Component {
     //adressEng: "",
     // data
     checkCode: "",
+    captchaUrl: "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/captcha",
     //message: "",
 
     validate: {
@@ -172,8 +173,11 @@ class RegForm extends Component {
     if (isValid) {
       this.props.onSubmit(e.target);
       // captha disable
-      this.setState({checkCode: ""});
-      this.handleValidate ("checkCode", false);
+      //this.setState({checkCode: ""});
+      //this.handleValidate ("checkCode", false);
+      this.setState({
+        captchaUrl: this.state.captchaUrl + "?t=" + new Date().getTime()
+      });
     } else {
       e.target.classList.add("was-validated");
     }
@@ -437,6 +441,7 @@ class RegForm extends Component {
                   onChange={this.handleChanges}
                   onValidate={isValid => this.handleValidate("checkCode", isValid)}
                   placeholder={i18n.formFields.captcha.label}
+                  src={this.state.captchaUrl}
                   invalidMessage={
                     i18n.formFields.captcha.validation.emptyOrIncorrect
                   }
