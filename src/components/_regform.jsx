@@ -190,7 +190,7 @@ class RegForm extends Component {
   };
 
   render() {
-    const i18n = this.props.i18n;
+    let i18n = this.props.i18n;
 
     return (
       <Form noValidate onSubmit={this.handleSubmit} innerRef={this.form}>

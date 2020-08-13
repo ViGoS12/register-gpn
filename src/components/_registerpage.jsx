@@ -4,7 +4,8 @@ import { Spinner, Alert, Button } from "reactstrap";
 import RegForm from "./_regform";
 import Backend from "./backend";
 import ProgressIndicator from "./progressindicator";
-//import { useHistory } from "react-router-dom";
+import i18n_en from "../i18n_en.json";
+import i18n_ru from "../i18n_ru.json";
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -20,12 +21,15 @@ class RegisterPage extends Component {
       alertVisible: false,
       hasError: undefined,
 
-      lang: this.props.lang
+      lang: this.props.lang,
+      i18n: this.props.i18n
     };
-    this.alertRef = React.createRef()
+
+    this.alertRef = React.createRef();
+    this.backend = new Backend();
   }
 
-  scrollToMyRef = (myRef) => window.scrollTo(0, myRef.current.offsetTop)  
+  scrollToMyRef = (myRef) => window.scrollTo(0, myRef.current.offsetTop)
 
   componentDidMount() {
     // link with token from email
@@ -127,8 +131,6 @@ class RegisterPage extends Component {
       //hasError: 1
     });
     this.scrollToMyRef(this.alertRef);
-    // refresh captcha here
-
   };
 
   oldBrowser() {
@@ -163,22 +165,22 @@ class RegisterPage extends Component {
   handleResponseTokenVerify = oResponse => {
     console.log("handleResponseVerify", oResponse);
     //JSON.parse(oResponse);
-      // {"response":{
-      //   "captchaPassed":true,
-      //   "requestCategory":"<p>Ссылка для перехода недействительна. Необходимо выполнить повторную регистрацию на ЭТП «Газпромнефть»<\/p> \n ",
-      //   "verify":"NoVerified",
-      //   "hasError":true}}
+    // {"response":{
+    //   "captchaPassed":true,
+    //   "requestCategory":"<p>Ссылка для перехода недействительна. Необходимо выполнить повторную регистрацию на ЭТП «Газпромнефть»<\/p> \n ",
+    //   "verify":"NoVerified",
+    //   "hasError":true}}
 
     if (oResponse.response.verify === "NoVerified") {
-      this.setState({ 
+      this.setState({
         status: "tokenFromEmailNotValid",
         alertText: oResponse.response.requestCategory,
         alertColor: "error",
         alertVisible: true,
         hasError: oResponse.response.hasError
       });
-    } else if (oResponse.response.verify === "Verified"){
-      this.setState({ 
+    } else if (oResponse.response.verify === "Verified") {
+      this.setState({
         status: "tokenFromEmailValid",
         alertText: oResponse.response.requestCategory,
         alertColor: "success",
@@ -186,7 +188,7 @@ class RegisterPage extends Component {
         hasError: oResponse.response.hasError
       });
     } else {
-      this.setState({ 
+      this.setState({
         status: "error",
         alertText: "Error in token verified, unknown response",
         alertVisible: true,
@@ -206,30 +208,37 @@ class RegisterPage extends Component {
   }
 
   changeLang = () => {
-    if (this.state.lang === "ru" ){
-      this.setState({ lang: "eng"});
+    if (this.state.lang === "ru") {
+      this.setState({ lang: "eng" });
+      this.updateI18n("eng");
     } else {
-      this.setState({ lang: "ru"});
+      this.setState({ lang: "ru" });
+      this.updateI18n("ru");
     }
-    //updateI18n();
   }
 
-
-  updateI18n= () => {
-    
-      this.setState({ i18n: null });
+  updateI18n = (lang) => {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      //LOCAL
+      if (lang === "eng") {
+        this.setState({ i18n: i18n_en.register });
+      } else {
+        this.setState({ i18n: i18n_ru.register });
+      }
+    } else {
+      //SERVER
       this.backend.getI18n(
-        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/i18n?lang="+this.state.lang,
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/i18n?lang=" + lang,
         oI18n => {
-          this.setState({ i18n: oI18n });
-          document.title = oI18n.register.caption;
+          this.setState({ i18n: oI18n.register });
         }
       );
+    }
   }
 
 
   render() {
-    const i18n = this.props.i18n;
+    let i18n = this.state.i18n;
     let content = undefined;
 
     switch (this.state.status) {
@@ -272,18 +281,18 @@ class RegisterPage extends Component {
             src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/regform/logo.png"
             //src="../logo.png"
             alt=""
-          /> 
+          />
           <div>
-            <a href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang}</a>
+            <button class="langbutton" title={i18n.langTooltip} href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang === "ru" ? 'Eng' : 'Rus'}</button>
           </div>
           <h2>{i18n.caption}</h2>
           <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
-              <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >Ошибка {this.state.httpError}</h4>
-              <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
+            <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >{this.state.httpError}</h4>
+            <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
           </Alert>
           <div className={this.state.progress < 100 ? 'pt-3 pb-3' : 'pt-3 pb-3 hidden'}>
-            <ProgressIndicator value={this.state.progress}/>
+            <ProgressIndicator value={this.state.progress} />
           </div>
         </div>
         {content}
