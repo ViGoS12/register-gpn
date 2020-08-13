@@ -1,7 +1,7 @@
 {
   "register": {
-    "langTooltip": "Change Language",
-    "caption": "Регистрация",
+    "langTooltip": "Сменить язык",
+    "caption": "Reg",
     "headText": "Регистрация контрагентов в системе 'Газпром-нефть'",
     "rezident": "Резидент",
     "norezident": "Нерезидент",
