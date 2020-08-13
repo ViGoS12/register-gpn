@@ -209,8 +209,8 @@ class RegisterPage extends Component {
 
   changeLang = () => {
     if (this.state.lang === "ru") {
-      this.setState({ lang: "eng" });
-      this.updateI18n("eng");
+      this.setState({ lang: "en" });
+      this.updateI18n("en");
     } else {
       this.setState({ lang: "ru" });
       this.updateI18n("ru");
@@ -220,7 +220,7 @@ class RegisterPage extends Component {
   updateI18n = (lang) => {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       //LOCAL
-      if (lang === "eng") {
+      if (lang === "en") {
         this.setState({ i18n: i18n_en.register });
       } else {
         this.setState({ i18n: i18n_ru.register });
