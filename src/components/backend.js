@@ -40,9 +40,9 @@ class Backend {
     const fullNameEncoded = encodeURI(oData.get("fullName"));
     const emailEncoded = encodeURI(oData.get("email"));
     const categoryEncoded = encodeURI(oData.get("category") === 'on' ? 1 : 0 );
-    //const egrulEncoded = encodeURI(oData.get("egrul"));
     const innEncoded = encodeURI(oData.get("inn"));
     const kppEncoded = encodeURI(oData.get("kpp"));
+    //const egrulEncoded = encodeURI(oData.get("egrul"));
     //const ogrnEncoded = encodeURI(oData.get("ogrn"));
     //const oktmoEncoded = encodeURI(oData.get("oktmo"));
     const shortNameEncoded = encodeURI(oData.get("shortName"));
@@ -53,6 +53,16 @@ class Backend {
     const regNameEncoded = encodeURI(oData.get("regNum")); //norezident
     const phoneOrgEncoded = encodeURI(oData.get("phoneOrg"));
     const emailOrgEncoded = encodeURI(oData.get("emailOrg"));
+    const funcEncoded1 = encodeURI(oData.get("f1") === 'on' ? 1 : 0 );
+    const funcEncoded2 = encodeURI(oData.get("f2") === 'on' ? 1 : 0 );
+    const funcEncoded3 = encodeURI(oData.get("f3") === 'on' ? 1 : 0 );
+    const funcEncoded4 = encodeURI(oData.get("f4") === 'on' ? 1 : 0 );
+    const funcEncoded5 = encodeURI(oData.get("f5") === 'on' ? 1 : 0 );
+    const funcEncoded6 = encodeURI(oData.get("f6") === 'on' ? 1 : 0 );
+    const funcEncoded7 = encodeURI(oData.get("f7") === 'on' ? 1 : 0 );
+    const funcEncoded8 = encodeURI(oData.get("f8") === 'on' ? 1 : 0 );
+    const funcEncoded9 = encodeURI(oData.get("f9") === 'on' ? 1 : 0 );
+
     //const messageEncoded = encodeURI(oData.get("message"));
     //const adressEncoded = encodeURI(oData.get("adress"));
     //const adressEngEncoded = encodeURI(oData.get("adressEng"));
@@ -74,6 +84,17 @@ class Backend {
     oData.append("regNameEncoded", regNameEncoded);
     oData.append("phoneOrgEncoded", phoneOrgEncoded);
     oData.append("emailOrgEncoded", emailOrgEncoded);
+    oData.append("functionEncodedF1", funcEncoded1);
+    oData.append("functionEncodedF2", funcEncoded2);
+    oData.append("functionEncodedF3", funcEncoded3);
+    oData.append("functionEncodedF4", funcEncoded4);
+    oData.append("functionEncodedF5", funcEncoded5);
+    oData.append("functionEncodedF6", funcEncoded6);
+    oData.append("functionEncodedF7", funcEncoded7);
+    oData.append("functionEncodedF8", funcEncoded8);
+    oData.append("functionEncodedF9", funcEncoded9);
+    
+    
     //oData.append("messageEncoded", messageEncoded);
     //oData.append("adressEncoded", adressEncoded);
     //oData.append("adressEngEncoded", adressEngEncoded);

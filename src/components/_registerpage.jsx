@@ -283,7 +283,7 @@ class RegisterPage extends Component {
             alt=""
           />
           <div>
-            <button class="langbutton" title={i18n.langTooltip} href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang === "ru" ? 'Eng' : 'Rus'}</button>
+            <button className="langbutton" title={i18n.langTooltip} href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang === "ru" ? 'Eng' : 'Rus'}</button>
           </div>
           <h2>{i18n.caption}</h2>
           <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />

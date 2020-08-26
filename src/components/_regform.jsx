@@ -11,6 +11,7 @@ import InputInn from "./_inputinn";
 //import InputOktmo from "./_inputoktmo";
 //import InputEgrul from "./_inputegrul";
 import InputTokenRegCheckbox from "./_inputtokenreg";
+import InputCheckList from "./_inputchecklist";
 import InputToken from "./_inputtoken";
 import InputEmailOrg from "./_inputemailorg";
 import InputPhoneOrg from "./_inputphoneorg";
@@ -36,6 +37,7 @@ class RegForm extends Component {
     tokenReg: false,
     modal: false,
     token: "",
+    checkedItems: new Map(),
     //user
     email: "",
     userName: "",
@@ -80,7 +82,7 @@ class RegForm extends Component {
 
       token: false,
       checkpersdata: false,
-      checkCode: false
+      checkCode: true   //false чтоб вкл капчку
       //message: false,
     }
   };
@@ -89,11 +91,17 @@ class RegForm extends Component {
   handleChanges = e => {
     const target = e.target;
     const name = target.name;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-
-    this.setState({
-      [name]: value
-    });
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
+    if (target.title === 'function') {
+      const item = e.target.name;
+      const isChecked = e.target.checked;
+      this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
+    } else {
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      this.setState({
+        [name]: value
+      });
+    }
 
     // remove form's top validated style
     this.form.current.classList.remove("was-validated");
@@ -283,6 +291,15 @@ class RegForm extends Component {
                   aboutLink={i18n.formFields.tokenReg.aboutLink}
                 />
 
+                <InputCheckList
+                  items={i18n.formFields.function.items}
+                  checkedItems={this.state.checkedItems}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.function.label}
+                  invalidMessage={i18n.formFields.function.validation.emptyValue}
+                  infoMessage={i18n.formFields.function.infoMessage}
+                />
+
                 <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>
 
                   <InputFullname
@@ -318,7 +335,7 @@ class RegForm extends Component {
                       maxLen={i18n.formFields.inn.validation.maxLen}
                     />
 
-                    <div className={this.state.ip ? '' : 'hidden'}>
+                    <div className={this.state.ip ? 'hidden' : ''}>
                       <InputKpp
                         value={this.state.kpp}
                         onValidate={isValid => this.handleValidate("kpp", isValid)}
