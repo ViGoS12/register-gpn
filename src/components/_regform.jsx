@@ -199,6 +199,7 @@ class RegForm extends Component {
 
   render() {
     let i18n = this.props.i18n;
+    let funcData = this.props.funcData;
 
     return (
       <Form noValidate onSubmit={this.handleSubmit} innerRef={this.form}>
@@ -292,12 +293,12 @@ class RegForm extends Component {
                 />
 
                 <InputCheckList
-                  items={i18n.formFields.function.items}
+                  items={funcData.function.items}
                   checkedItems={this.state.checkedItems}
                   onChange={this.handleChanges}
-                  label={i18n.formFields.function.label}
-                  invalidMessage={i18n.formFields.function.validation.emptyValue}
-                  infoMessage={i18n.formFields.function.infoMessage}
+                  label={funcData.function.label}
+                  invalidMessage={funcData.function.validation.emptyValue}
+                  infoMessage={funcData.function.infoMessage}
                 />
 
                 <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>

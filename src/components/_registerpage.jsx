@@ -22,7 +22,8 @@ class RegisterPage extends Component {
       hasError: undefined,
 
       lang: this.props.lang,
-      i18n: this.props.i18n
+      i18n: this.props.i18n,
+      funcData: this.props.funcData
     };
 
     this.alertRef = React.createRef();
@@ -239,6 +240,7 @@ class RegisterPage extends Component {
 
   render() {
     let i18n = this.state.i18n;
+    let funcData = this.state.funcData;
     let content = undefined;
 
     switch (this.state.status) {
@@ -266,7 +268,7 @@ class RegisterPage extends Component {
         break;
 
       case "RegForm":
-        content = <RegForm i18n={i18n} onSubmit={this.handleSubmit} />;
+        content = <RegForm i18n={i18n} funcData={funcData} onSubmit={this.handleSubmit} />;
         break;
 
       default:
@@ -286,13 +288,13 @@ class RegisterPage extends Component {
             <button className="langbutton" title={i18n.langTooltip} href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang === "ru" ? 'Eng' : 'Rus'}</button>
           </div>
           <h2>{i18n.caption}</h2>
-          <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
+          <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }}/>
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
             <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >{this.state.httpError}</h4>
-            <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
+            <div dangerouslySetInnerHTML={{ __html: this.state.alertText }}/>
           </Alert>
           <div className={this.state.progress < 100 ? 'pt-3 pb-3' : 'pt-3 pb-3 hidden'}>
-            <ProgressIndicator value={this.state.progress} />
+            <ProgressIndicator value={this.state.progress}/>
           </div>
         </div>
         {content}
