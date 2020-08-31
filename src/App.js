@@ -30,9 +30,9 @@ class App extends Component {
     } else {
       //SERVER (getI18n подходит для людого запроса на сервер)
       this.backend.getI18n(
-        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/funcData?lang=" + lang,
-        funcData => {
-          this.setState({ funcData: funcData });
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang=" + lang,
+        functionData => {
+          this.setState({ funcData: functionData });
         }
       );
     }
