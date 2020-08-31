@@ -293,12 +293,12 @@ class RegForm extends Component {
                 />
 
                 <InputCheckList
-                  items={funcData.function.items}
+                  items={funcData.items}
                   checkedItems={this.state.checkedItems}
                   onChange={this.handleChanges}
-                  label={funcData.function.label}
-                  invalidMessage={funcData.function.validation.emptyValue}
-                  infoMessage={funcData.function.infoMessage}
+                  label={funcData.label}
+                  invalidMessage={funcData.validation.emptyValue}
+                  infoMessage={funcData.infoMessage}
                 />
 
                 <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>

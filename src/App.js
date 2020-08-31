@@ -22,11 +22,11 @@ class App extends Component {
   getFunctionsInputData() {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       //LOCAL
-      this.setState({ i18n: i18n_ru });
+      this.setState({ funcData: funcData_ru });
     } else {
       //SERVER (getI18n подходит для людого запроса на сервер)
       this.backend.getI18n(
-        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang=" + this.state.lang,
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang="+this.state.lang,
         functionData => {
           this.setState({ funcData: functionData });
         }
