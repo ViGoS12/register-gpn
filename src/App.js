@@ -19,18 +19,14 @@ class App extends Component {
     this.backend = new Backend();
   }
 
-  getFunctionsInputData = (lang) => {
+  getFunctionsInputData() {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       //LOCAL
-      if (lang === "en") {
-        this.setState({ funcData: funcData_en });
-      } else {
-        this.setState({ funcData: funcData_ru });
-      }
+      this.setState({ i18n: i18n_ru });
     } else {
       //SERVER (getI18n подходит для людого запроса на сервер)
       this.backend.getI18n(
-        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang=" + lang,
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang=" + this.state.lang,
         functionData => {
           this.setState({ funcData: functionData });
         }
