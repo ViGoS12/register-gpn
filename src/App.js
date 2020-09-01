@@ -27,8 +27,8 @@ class App extends Component {
       //SERVER (getI18n подходит для людого запроса на сервер)
       this.backend.getI18n(
         "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang="+this.state.lang,
-        functionData => {
-          this.setState({ funcData: functionData });
+        ofunctionData => {
+          this.setState({ funcData: ofunctionData });
         }
       );
     }
@@ -58,8 +58,8 @@ class App extends Component {
 
 
   render() {
-    return this.state.i18n ? (
-      <RegisterPage i18n={this.state.i18n.register} funcData={this.state.funcData} lang={this.state.lang} />
+    return (this.state.i18n && this.state.funcData) ? (
+      <RegisterPage i18n={this.state.i18n.register} funcData={this.state.funcData.functionData} lang={this.state.lang} />
     ) : (
       <Spinner color="dark" className="spinner" />
     );
