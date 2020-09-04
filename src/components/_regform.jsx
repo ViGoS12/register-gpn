@@ -49,6 +49,7 @@ class RegForm extends Component {
     shortName: "",
     kpp: "",
     inn: "",
+    innMaxLen: 12,
     //ogrn: "",
     //oktmo: "",
     emailOrg: "",
@@ -93,11 +94,19 @@ class RegForm extends Component {
     const name = target.name;
     //const value = target.type === 'checkbox' ? target.checked : target.value;
     if (target.title === 'function') {
-      const item = e.target.name;
-      const isChecked = e.target.checked;
+      const item = target.name;
+      const isChecked = target.checked;
       this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
     } else {
       const value = target.type === 'checkbox' ? target.checked : target.value;
+      // inn lenght
+      if (target.name === 'ip') {
+        if (target.checked) {
+          this.setState({ innMaxLen: 10 });
+        } else {
+          this.setState({ innMaxLen: 12 });
+        }
+      }
       this.setState({
         [name]: value
       });
@@ -333,7 +342,7 @@ class RegForm extends Component {
                       placeholder={i18n.formFields.inn.placeholder}
                       invalidMessage={i18n.formFields.inn.validation.emptyValue}
                       minLen={i18n.formFields.inn.validation.minLen}
-                      maxLen={i18n.formFields.inn.validation.maxLen}
+                      maxLen={this.state.innMaxLen}
                     />
 
                     <div className={this.state.ip ? 'hidden' : ''}>
@@ -371,11 +380,11 @@ class RegForm extends Component {
                       maxLen={i18n.formFields.ogrn.validation.maxLen}
                     /> */}
 
-                  </div> 
+                  </div>
                   {/* resident-info */}
 
                   <div id="no-resident-info" className={this.state.category ? '' : 'hidden'}>
-                  <InputRegNum
+                    <InputRegNum
                       value={this.state.regNum}
                       onValidate={isValid => this.handleValidate("regNum", isValid)}
                       onChange={this.handleChanges}
@@ -384,7 +393,7 @@ class RegForm extends Component {
                       invalidMessage={i18n.formFields.regNum.validation.emptyValue}
                       minLen={i18n.formFields.regNum.validation.minLen}
                     />
-                </div>
+                  </div>
 
                   <InputPhoneOrg
                     value={this.state.phoneOrg}

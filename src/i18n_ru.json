@@ -45,9 +45,9 @@
         "label": "ИНН",
         "placeholder": "ИНН",
         "validation": {
-          "emptyValue": "Поле обязательное, 10 символов",
+          "emptyValue": "Поле обязательное, 12 символов",
           "minLen": 10,
-          "maxLen": 10
+          "maxLen": 12
         }
       },
       "ogrn": {
@@ -197,10 +197,10 @@
       },
 
       "ip": {
-        "label": "ИП",
-        "infoMessage": "Являетесь ли вы ИП?",
+        "label": "Физическое лицо",
+        "infoMessage": "Являетесь ли вы Физическим лицом?",
         "validation": { 
-          "emptyValue": "Являетесь ли вы ИП?" 
+          "emptyValue": "Являетесь ли вы Физическим лицом?"
         }
       },
 
