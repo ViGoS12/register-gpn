@@ -6,6 +6,8 @@ import Backend from "./backend";
 import ProgressIndicator from "./progressindicator";
 import i18n_en from "../i18n_en.json";
 import i18n_ru from "../i18n_ru.json";
+import funcData_en from "../funcData_en.json";
+import funcData_ru from "../funcData_ru.json";
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -212,9 +214,11 @@ class RegisterPage extends Component {
     if (this.state.lang === "ru") {
       this.setState({ lang: "en" });
       this.updateI18n("en");
+      this.getFunctionsInputData("en");
     } else {
       this.setState({ lang: "ru" });
       this.updateI18n("ru");
+      this.getFunctionsInputData("ru");
     }
   }
 
@@ -232,6 +236,26 @@ class RegisterPage extends Component {
         "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/i18n?lang=" + lang,
         oI18n => {
           this.setState({ i18n: oI18n.register });
+        }
+      );
+    }
+  }
+
+  getFunctionsInputData = (lang) => {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      //LOCAL
+      //this.setState({ funcData: funcData_ru });
+      if (lang === "en") {
+        this.setState({ funcData: funcData_ru });
+      } else {
+        this.setState({ funcData: funcData_en });
+      }
+    } else {
+      //SERVER (getI18n подходит для людого запроса на сервер)
+      this.backend.getI18n(
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang="+this.state.lang,
+        ofunctionData => {
+          this.setState({ funcData: ofunctionData });
         }
       );
     }

@@ -49,7 +49,7 @@ class RegForm extends Component {
     shortName: "",
     kpp: "",
     inn: "",
-    innMaxLen: 12,
+    innMaxLen: 10,
     //ogrn: "",
     //oktmo: "",
     emailOrg: "",
@@ -102,9 +102,9 @@ class RegForm extends Component {
       // inn lenght
       if (target.name === 'ip') {
         if (target.checked) {
-          this.setState({ innMaxLen: 10 });
-        } else {
           this.setState({ innMaxLen: 12 });
+        } else {
+          this.setState({ innMaxLen: 10 });
         }
       }
       this.setState({
@@ -301,14 +301,14 @@ class RegForm extends Component {
                   aboutLink={i18n.formFields.tokenReg.aboutLink}
                 />
 
-                <InputCheckList
+                {/* <InputCheckList
                   items={funcData.items}
                   checkedItems={this.state.checkedItems}
                   onChange={this.handleChanges}
                   label={funcData.label}
                   invalidMessage={funcData.validation.emptyValue}
                   infoMessage={funcData.infoMessage}
-                />
+                /> */}
 
                 <div id="if-no-token" className={this.state.tokenReg ? 'hidden' : ''}>
 

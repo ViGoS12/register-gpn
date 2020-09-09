@@ -3,7 +3,6 @@ import { Spinner } from "reactstrap";
 import "./App.css";
 import Backend from "./components/backend";
 import i18n_ru from "./i18n_ru.json";
-import funcData_en from "./funcData_en.json";
 import funcData_ru from "./funcData_ru.json";
 import RegisterPage from "./components/_registerpage";
 
