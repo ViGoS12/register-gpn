@@ -11,7 +11,7 @@ import InputInn from "./_inputinn";
 //import InputOktmo from "./_inputoktmo";
 //import InputEgrul from "./_inputegrul";
 import InputTokenRegCheckbox from "./_inputtokenreg";
-import InputCheckList from "./_inputchecklist";
+//import InputCheckList from "./_inputchecklist";
 import InputToken from "./_inputtoken";
 import InputEmailOrg from "./_inputemailorg";
 import InputPhoneOrg from "./_inputphoneorg";
@@ -208,7 +208,7 @@ class RegForm extends Component {
 
   render() {
     let i18n = this.props.i18n;
-    let funcData = this.props.funcData;
+    //let funcData = this.props.funcData;
 
     return (
       <Form noValidate onSubmit={this.handleSubmit} innerRef={this.form}>

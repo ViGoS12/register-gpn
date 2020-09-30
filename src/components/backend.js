@@ -32,6 +32,65 @@ class Backend {
     };
   }
 
+  getFile(url) {
+    const xhr = this.createXHR();
+    xhr.open("GET", url, true);
+    xhr.send();
+    var that = this;
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4) {
+        return false;
+      }
+
+      if (xhr.status !== 200) {
+        console.log(xhr.status + ": " + xhr.statusText);
+      } else {
+        //callbackI18n(JSON.parse(xhr.responseText));
+        that.downloadFile(xhr.responseText);
+      }
+    };
+  }
+
+  downloadFile(data) {
+    //var encode = window.atob(data.FileBody);
+    //  var _blob = new Blob([that._createUint8Array(encode)], {
+    //  type: data.fileType
+    //});
+
+    var link = document.createElement('a');
+    link.download = data.fileName;
+    //  var blob = new Blob([data.FileBody], {
+    //  type: data.fileType
+    //  });
+
+    //var blob = this.b64toBlob(b64data, "application/msword");
+    link.href = URL.createObjectURL(data.fileBody);
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  // b64toBlob(b64Data, contentType) {
+  //   var sliceSize = 512;
+  //   var byteCharacters = atob(b64Data);
+  //   var byteArrays = [];
+
+  //   for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+  //     var slice = byteCharacters.slice(offset, offset + sliceSize);
+  //     var byteNumbers = new Array(slice.length);
+  //     for (var i = 0; i < slice.length; i++) {
+  //       byteNumbers[i] = slice.charCodeAt(i);
+  //     }
+  //     var byteArray = new Uint8Array(byteNumbers);
+  //     byteArrays.push(byteArray);
+  //   }
+
+  //   var blob = new Blob(byteArrays, {
+  //     type: contentType
+  //   });
+  //   return blob;
+  // }
+
   asyncSubmit(oForm, url, onResponse, onUpdateProgress, onError) {
     const xhr = this.createXHR();
     require("formdata-polyfill");

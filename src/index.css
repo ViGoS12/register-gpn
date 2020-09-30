@@ -29,3 +29,7 @@ code {
   background: #7f91a5;
   color: #fff;
 }
+
+.instructionLink{
+  float: right;
+}

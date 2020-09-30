@@ -16,6 +16,9 @@
     },
 
     "formFields": {
+      "instructionLink": {
+        "label": "Ссылка на инструкцию"
+      },
       "fullName": {
         "label": "Полное наименование",
         "placeholder": "Полное наименование организации",

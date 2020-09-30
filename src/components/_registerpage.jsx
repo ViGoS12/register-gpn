@@ -9,6 +9,7 @@ import i18n_ru from "../i18n_ru.json";
 import funcData_en from "../funcData_en.json";
 import funcData_ru from "../funcData_ru.json";
 
+
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -253,7 +254,7 @@ class RegisterPage extends Component {
     } else {
       //SERVER (getI18n подходит для людого запроса на сервер)
       this.backend.getI18n(
-        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang="+this.state.lang,
+        "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/function?lang=" + this.state.lang,
         ofunctionData => {
           this.setState({ funcData: ofunctionData });
         }
@@ -261,6 +262,11 @@ class RegisterPage extends Component {
     }
   }
 
+
+  handleFileDownload = () => {
+    var url = "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/instruction";
+    this.backend.getFile(url);
+  }
 
   render() {
     let i18n = this.state.i18n;
@@ -312,13 +318,16 @@ class RegisterPage extends Component {
             <button className="langbutton" title={i18n.langTooltip} href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang === "ru" ? 'Eng' : 'Rus'}</button>
           </div>
           <h2>{i18n.caption}</h2>
-          <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }}/>
+          <div className="instructionLink">
+            <a href="javascript:void(null);" onClick={this.handleFileDownload}>{i18n.formFields.instructionLink.label}</a>
+          </div>
+          <div className="lead pb-3" dangerouslySetInnerHTML={{ __html: this.state.headtext }} />
           <Alert color={this.state.alertColor} isOpen={this.state.alertVisible} toggle={this.onDismissAlert}>
             <h4 className={this.state.httpError ? 'alert-heading' : 'alert-heading hidden'} >{this.state.httpError}</h4>
-            <div dangerouslySetInnerHTML={{ __html: this.state.alertText }}/>
+            <div dangerouslySetInnerHTML={{ __html: this.state.alertText }} />
           </Alert>
           <div className={this.state.progress < 100 ? 'pt-3 pb-3' : 'pt-3 pb-3 hidden'}>
-            <ProgressIndicator value={this.state.progress}/>
+            <ProgressIndicator value={this.state.progress} />
           </div>
         </div>
         {content}
