@@ -53,18 +53,23 @@ class Backend {
   }
 
   downloadFile(data) {
+
+    var link = document.createElement('a');
+    link.download = data.fileName;
+    
+    //=====
+    //  var blob = new Blob([data.FileBody], {
+    //  type: data.fileType
+    //  });
+
     //var encode = window.atob(data.FileBody);
     //  var _blob = new Blob([that._createUint8Array(encode)], {
     //  type: data.fileType
     //});
 
-    var link = document.createElement('a');
-    link.download = data.fileName;
-    //  var blob = new Blob([data.FileBody], {
-    //  type: data.fileType
-    //  });
-
     //var blob = this.b64toBlob(b64data, "application/msword");
+    //=====
+
     link.href = URL.createObjectURL(data.fileBody);
     link.click();
     URL.revokeObjectURL(link.href);
