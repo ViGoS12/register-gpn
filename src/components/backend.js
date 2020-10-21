@@ -72,7 +72,7 @@ class Backend {
         //that.downloadFile(JSON.parse(res));
         
         //prod
-        that.downloadFile(xhr.response);
+        that.downloadFile(JSON.parse(xhr.responseText));
       }
     };
   }
@@ -157,6 +157,7 @@ class Backend {
     const funcEncoded7 = encodeURI(oData.get("f7") === 'on' ? 1 : 0 );
     const funcEncoded8 = encodeURI(oData.get("f8") === 'on' ? 1 : 0 );
     const funcEncoded9 = encodeURI(oData.get("f9") === 'on' ? 1 : 0 );
+    const smspEncoded = encodeURI(oData.get("smsp") === 'on' ? 1 : 0 );
 
     //const messageEncoded = encodeURI(oData.get("message"));
     //const adressEncoded = encodeURI(oData.get("adress"));
@@ -188,7 +189,7 @@ class Backend {
     oData.append("functionEncodedF7", funcEncoded7);
     oData.append("functionEncodedF8", funcEncoded8);
     oData.append("functionEncodedF9", funcEncoded9);
-    
+    oData.append("smspEncoded", smspEncoded);
     
     //oData.append("messageEncoded", messageEncoded);
     //oData.append("adressEncoded", adressEncoded);

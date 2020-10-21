@@ -19,8 +19,9 @@ import InputRegNum from "./_inputregnum";
 import InputUserName from "./_inputusername";
 import InputSecondName from "./_inputusersecondname";
 import InputUserSurname from "./_inputusershurname";
-import InputCategory from "./_inputcategory";
-import InputIP from "./_inputip";
+import InputCategoryCheckbox from "./_inputcategory";
+import InputIPCheckbox from "./_inputip";
+import InputSMSPCheckbox from "./_inputsmsp";
 import Inputcheckpersdata from "./_inputcheckpersdata";
 import InputCaptcha from "./inputcaptcha";
 import MessageWindow from "./messagewindow";
@@ -34,6 +35,7 @@ class RegForm extends Component {
   state = {
     category: false,
     ip: false,
+    smsp: false,
     tokenReg: false,
     modal: false,
     token: "",
@@ -274,7 +276,7 @@ class RegForm extends Component {
 
                 <h5 className="mb-3 mt-5" >{i18n.organizationHeader}</h5>
 
-                <InputCategory
+                <InputCategoryCheckbox
                   //onValidate={isValid => this.handleValidate("category", isValid)}
                   value={this.state.category}
                   onChange={this.handleChanges}
@@ -283,12 +285,20 @@ class RegForm extends Component {
                   infoMessage={i18n.formFields.category.infoMessage}
                 />
 
-                <InputIP
+                <InputIPCheckbox
                   value={this.state.ip}
                   onChange={this.handleChanges}
                   label={i18n.formFields.ip.label}
                   invalidMessage={i18n.formFields.ip.validation.emptyValue}
                   infoMessage={i18n.formFields.ip.infoMessage}
+                />
+
+                <InputSMSPCheckbox
+                  value={this.state.smsp}
+                  onChange={this.handleChanges}
+                  label={i18n.formFields.smsp.label}
+                  invalidMessage={i18n.formFields.smsp.validation.emptyValue}
+                  infoMessage={i18n.formFields.smsp.infoMessage}
                 />
 
                 <InputTokenRegCheckbox
