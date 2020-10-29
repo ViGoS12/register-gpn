@@ -22,7 +22,6 @@ class InputInn extends InputComponent {
     } else {
       this.setInvalid(input);
     }
-
     this.props.onValidate(result);
   }
 
