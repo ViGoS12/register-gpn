@@ -9,6 +9,11 @@ class InputComponent extends Component {
     this.changeClass(inputField, "is-invalid", "is-valid");
   }
 
+  setNeutral(inputField) {
+    inputField.classList.remove("is-invalid");
+    inputField.classList.remove("is-valid");
+  }
+
   changeClass(element, oldClass, newClass) {
     try {
       element.classList.remove(oldClass);

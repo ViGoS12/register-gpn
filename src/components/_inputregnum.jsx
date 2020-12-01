@@ -32,6 +32,7 @@ class InputRegNum extends InputComponent {
             className="form-control"
             id="regNum"
             name="regNum"
+            ref="regNum"
             required
             onChange={this.handleChange}
             value={this.props.value}

@@ -109,6 +109,21 @@ class RegForm extends Component {
           this.setState({ innMaxLen: 10 });
         }
       }
+      // clear reqNum when other category noRezident selected after regnum text
+      if (target.name === 'category' && !target.checked) {
+        this.setState({
+          regNum: ""
+        });
+        let validate = { ...this.state.validate };
+        validate.regNum = false;
+        this.setState({ validate: validate });
+      }
+      if (target.name === 'category' && target.checked) {
+        var reginput = this.form.current[12];  /// !!!!! imporant - get form input by number !! fix after change form!
+        reginput.classList.remove("is-valid");
+        reginput.classList.remove("is-invalid");
+      }
+
       this.setState({
         [name]: value
       });

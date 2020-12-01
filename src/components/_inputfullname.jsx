@@ -13,13 +13,29 @@ class InputFullname extends InputComponent {
     const minLen = this.props.minLen;
     const value = input.value;
 
-    if (value && value.length >= minLen) {
+    if (value && this.validateSymbols(input) && value.length >= minLen ) {
       result = true;
       this.setValid(input);
     } else {
       this.setInvalid(input);
     }
     this.props.onValidate(result);
+  }
+
+  validateSymbols(input){
+    const re = /^[?!,'"—«‎»\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
+    //const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
+    const txt = input.value;
+    let result = false;
+
+    if (re.test(String(txt))) {
+      result = true;
+      this.setValid(input);
+    } else {
+      this.setInvalid(input);
+    }
+    console.log("validateInput:" + result);
+    return result;
   }
 
   render() {

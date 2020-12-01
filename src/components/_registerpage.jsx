@@ -8,6 +8,7 @@ import i18n_en from "../i18n_en.json";
 import i18n_ru from "../i18n_ru.json";
 import funcData_en from "../funcData_en.json";
 import funcData_ru from "../funcData_ru.json";
+import FaqWindow from "./faq";
 
 
 class RegisterPage extends Component {
@@ -24,6 +25,8 @@ class RegisterPage extends Component {
       alertVisible: false,
       hasError: undefined,
 
+      modal: false,
+
       lang: this.props.lang,
       i18n: this.props.i18n,
       funcData: this.props.funcData
@@ -32,6 +35,15 @@ class RegisterPage extends Component {
     this.alertRef = React.createRef();
     this.backend = new Backend();
   }
+
+  //modal show-hide
+  handleModalFAQ = (title, text) => {
+    this.setState({
+      modal: !this.state.modal,
+      title: title,
+      text: text
+    });
+  };
 
   scrollToMyRef = (myRef) => window.scrollTo(0, myRef.current.offsetTop)
 
@@ -223,6 +235,10 @@ class RegisterPage extends Component {
     }
   }
 
+  faq = () => {
+    
+  }
+
   updateI18n = (lang) => {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       //LOCAL
@@ -312,10 +328,11 @@ class RegisterPage extends Component {
             className="d-block ml-auto mr-0 mb-4"
             src="/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/regform/logo.png"
             //src="../logo.png"
-            alt=""
+            alt="logo"
           />
           <div>
             <button className="langbutton" title={i18n.langTooltip} href="javascript:void(null);" onClick={this.changeLang}>{this.state.lang === "ru" ? 'Eng' : 'Rus'}</button>
+            {/* <button className="langbutton mr-2" href="javascript:void(null);" onClick={this.handleModalFAQ}>FAQ</button> */}
           </div>
           <h2>{i18n.caption}</h2>
           <div className="instructionLink">
@@ -331,6 +348,13 @@ class RegisterPage extends Component {
           </div>
         </div>
         {content}
+        <FaqWindow
+          className="classModal"
+          modal={this.state.modal}
+          handleModal={this.handleModalFAQ}
+          title={i18n.formFields.faq.label}
+          text={i18n.formFields.faq.questions}
+        />
       </div>
     );
   }
