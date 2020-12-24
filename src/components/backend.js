@@ -146,6 +146,7 @@ class Backend {
     const userSecondNameEncoded = encodeURI(oData.get("userSecondName"));
     const userSurenameEncoded = encodeURI(oData.get("userSurname"));
     const regNameEncoded = encodeURI(oData.get("regNum")); //norezident
+    const countryEncoded = encodeURI(oData.get("country"));
     const phoneOrgEncoded = encodeURI(oData.get("phoneOrg"));
     const emailOrgEncoded = encodeURI(oData.get("emailOrg"));
     const funcEncoded1 = encodeURI(oData.get("f1") === 'on' ? 1 : 0 );
@@ -178,6 +179,7 @@ class Backend {
     oData.append("userSecondNameEncoded", userSecondNameEncoded);
     oData.append("userSurenameEncoded", userSurenameEncoded);
     oData.append("regNameEncoded", regNameEncoded);
+    oData.append("countryEncoded", countryEncoded);
     oData.append("phoneOrgEncoded", phoneOrgEncoded);
     oData.append("emailOrgEncoded", emailOrgEncoded);
     oData.append("functionEncodedF1", funcEncoded1);

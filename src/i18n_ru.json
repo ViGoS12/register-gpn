@@ -149,6 +149,14 @@
           "minLen": 1
         }
       },
+      
+      "country": {
+        "label": "Country",
+        "infoMessage": "Please select your registration Country",
+        "validation": { 
+          "emptyValue": "Please select your registration Country"
+        }
+      },
 
       "userName": {
         "label": "Имя",
@@ -240,23 +248,6 @@
 
       "btnSend": {
         "caption": "Отправить"
-      },
-
-      "faq": {
-        "label": "FAQ",
-        "questions": [{
-          "name": 1,
-          "title": "Заголовок вопроса",
-          "text": "Ответ на вопрос"
-        },{
-          "name": 2,
-          "title": "Заголовок вопроса",
-          "text": "Ответ на вопрос"
-        },{
-          "name": 3,
-          "title": "Заголовок вопроса",
-          "text": "Ответ на вопрос"
-        }]
       }
 
     },

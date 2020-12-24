@@ -16,6 +16,7 @@ import InputToken from "./_inputtoken";
 import InputEmailOrg from "./_inputemailorg";
 import InputPhoneOrg from "./_inputphoneorg";
 import InputRegNum from "./_inputregnum";
+import SelectCountry from "./_selectcountry";
 import InputUserName from "./_inputusername";
 import InputSecondName from "./_inputusersecondname";
 import InputUserSurname from "./_inputusershurname";
@@ -57,6 +58,7 @@ class RegForm extends Component {
     emailOrg: "",
     phoneOrg: "",
     regNum: "",
+    country: "",
     //engName: "",
     //adress: "",
     //adressEng: "",
@@ -80,6 +82,7 @@ class RegForm extends Component {
       //adress: false,
       //adressEng: false
       regNum: false,
+      country: false,
       phoneOrg: false,
       emailOrg: false,
 
@@ -112,10 +115,12 @@ class RegForm extends Component {
       // clear reqNum when other category noRezident selected after regnum text
       if (target.name === 'category' && !target.checked) {
         this.setState({
-          regNum: ""
+          regNum: "",
+          country: ""
         });
         let validate = { ...this.state.validate };
         validate.regNum = false;
+        validate.country = false;
         this.setState({ validate: validate });
       }
       if (target.name === 'category' && target.checked) {
@@ -175,6 +180,7 @@ class RegForm extends Component {
             this.state.validate.fullname &&
             this.state.validate.shortName &&
             this.state.validate.regNum &&
+            this.state.validate.country &&
             this.state.validate.phoneOrg &&
             this.state.validate.emailOrg
           ) {
@@ -418,6 +424,14 @@ class RegForm extends Component {
                       invalidMessage={i18n.formFields.regNum.validation.emptyValue}
                       minLen={i18n.formFields.regNum.validation.minLen}
                     />
+                    <SelectCountry
+                      value={this.state.country}
+                      onValidate={isValid => this.handleValidate("country", isValid)}
+                      onChange={this.handleChanges}
+                      label={i18n.formFields.country.label}
+                      invalidMessage={i18n.formFields.country.validation.emptyValue}
+                    />
+
                   </div>
 
                   <InputPhoneOrg

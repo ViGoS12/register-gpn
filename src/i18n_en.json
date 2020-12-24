@@ -150,6 +150,14 @@
         }
       },
 
+      "country": {
+        "label": "Country",
+        "infoMessage": "Please select your registration Country",
+        "validation": { 
+          "emptyValue": "Please select your registration Country"
+        }
+      },
+
       "userName": {
         "label": "Имя",
         "placeholder": "Введите Ваше имя",
@@ -240,23 +248,6 @@
 
       "btnSend": {
         "caption": "Отправить"
-      },
-
-      "faq": {
-        "label": "FAQ",
-        "questions": [{
-          "name": 1,
-          "title": "Заголовок вопроса",
-          "text": "Ответ вопроса"
-        },{
-          "name": 2,
-          "title": "Заголовок вопроса",
-          "text": "Ответ вопроса"
-        },{
-          "name": 3,
-          "title": "Заголовок вопроса",
-          "text": "Ответ вопроса"
-        }]
       }
     },
 

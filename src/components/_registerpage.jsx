@@ -348,13 +348,13 @@ class RegisterPage extends Component {
           </div>
         </div>
         {content}
-        <FaqWindow
+        {/* <FaqWindow
           className="classModal"
           modal={this.state.modal}
           handleModal={this.handleModalFAQ}
           title={i18n.formFields.faq.label}
           text={i18n.formFields.faq.questions}
-        />
+        /> */}
       </div>
     );
   }
