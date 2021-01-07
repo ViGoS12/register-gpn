@@ -282,9 +282,9 @@ class SelectCountry extends InputComponent {
             required
             onChange={this.handleChange}
             value={this.props.value}>
-              <option value="value1">{this.props.label}</option>
+              <option value="" key="noselected">{this.props.label}</option>
               {countryList.map(item => (
-                <option value={item.name}>{item.name}</option>
+                <option value={item.name} key={item.code}>{item.name}</option>
               ))}
           </select>
           {/* <span className="floating-label">{this.props.label}</span> */}

@@ -152,7 +152,7 @@ class RegForm extends Component {
     // const isValid =
     //   !Object.values(this.state.validate).includes(false) &&
     //   this.attachList.current.isValid();
-    console.log("handleSubmit validate ", this.state);
+    //   console.log("handleSubmit validate ", this.state);
 
     let isValid;
     // let UserValid = ["userName", "userSecondName", "userSurname", "email", "checkpersdata"];
