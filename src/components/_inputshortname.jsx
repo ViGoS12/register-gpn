@@ -23,7 +23,7 @@ class InputShortname extends InputComponent {
   }
 
   validateSymbols(input){
-    const re = /^[?!,'"—«‎»\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
+    const re = /^[?!,'"—+«‎»\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
     //const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
     const txt = input.value;
     let result = false;

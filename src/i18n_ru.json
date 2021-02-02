@@ -152,9 +152,9 @@
       
       "country": {
         "label": "Country",
-        "infoMessage": "Please select your registration Country",
+        "infoMessage": "Пожалуйста, выберите страну регистрации",
         "validation": { 
-          "emptyValue": "Please select your registration Country"
+          "emptyValue": "Пожалуйста, выберите страну регистрации"
         }
       },
 
