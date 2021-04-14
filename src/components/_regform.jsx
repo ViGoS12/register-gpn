@@ -114,6 +114,7 @@ class RegForm extends Component {
       }
       // clear reqNum when other category noRezident selected after regnum text
       if (target.name === 'category' && !target.checked) {
+        //clear
         this.setState({
           regNum: "",
           country: ""
@@ -122,11 +123,26 @@ class RegForm extends Component {
         validate.regNum = false;
         validate.country = false;
         this.setState({ validate: validate });
+        this.form.current[10].classList.remove("is-valid"); //inn
+        this.form.current[10].classList.remove("is-invalid"); 
+        this.form.current[11].classList.remove("is-valid"); //kpp
+        this.form.current[11].classList.remove("is-invalid"); //kpp
       }
       if (target.name === 'category' && target.checked) {
-        var reginput = this.form.current[12];  /// !!!!! imporant - get form input by number !! fix after change form!
-        reginput.classList.remove("is-valid");
-        reginput.classList.remove("is-invalid");
+        // clear
+        /// !!!!! imporant - get form input by number !! fix after change form!
+        this.form.current[12].classList.remove("is-valid"); //regnum
+        this.form.current[12].classList.remove("is-invalid");
+        this.form.current[13].classList.remove("is-valid"); //country
+        this.form.current[13].classList.remove("is-invalid"); //country
+        this.setState({
+          inn: "",
+          kpp: ""
+        });
+        let validate = { ...this.state.validate };
+        validate.inn = false;
+        validate.kpp = false;
+        this.setState({ validate: validate });
       }
 
       this.setState({
