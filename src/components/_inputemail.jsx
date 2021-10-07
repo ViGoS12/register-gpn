@@ -9,7 +9,7 @@ class InputEmail extends InputComponent {
   };
 
   validateValue(input) {
-    const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
+    const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
     const email = input.value;
     let result = false;
 
