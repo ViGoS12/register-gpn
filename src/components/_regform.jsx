@@ -106,6 +106,9 @@ class RegForm extends Component {
       const value = target.type === 'checkbox' ? target.checked : target.value;
       // inn lenght
       if (target.name === 'ip') {
+        this.setState({ inn: "" });
+        this.form.current[10].classList.remove("is-valid");
+        this.form.current[10].classList.remove("is-invalid"); 
         if (target.checked) {
           this.setState({ innMaxLen: 12 });
         } else {

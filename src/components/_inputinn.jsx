@@ -16,7 +16,7 @@ class InputInn extends InputComponent {
     //const minLen = this.props.minLen;
     const value = input.value;
 
-    if (value && this.validateInn(value, this.error)) {
+    if (value && value.length === this.props.maxLen && this.validateInn(value, this.error)) {
       result = true;
       this.setValid(input);
     } else {
@@ -66,7 +66,7 @@ class InputInn extends InputComponent {
       }
       if (!result) {
         error.code = 4;
-        error.message = 'Неправильное контрольное число';
+        error.message = 'Неверный ИНН';
       }
     }
     return result;

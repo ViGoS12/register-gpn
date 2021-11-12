@@ -23,19 +23,25 @@ class InputFullname extends InputComponent {
   }
 
   validateSymbols(input){
-    const re = /^[?!,'":@*—+«‎»()\\/\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
-    //const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
+    const reSpace = /^((?!\s{2}).)*$/;
     const txt = input.value;
-    let result = false;
+    if (reSpace.test(String(txt))) {
+      const re = /^[?!,'":@*—+«‎»()\\/\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
+      //const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
+      let result = false;
 
-    if (re.test(String(txt))) {
-      result = true;
-      this.setValid(input);
+      if (re.test(String(txt))) {
+        result = true;
+        this.setValid(input);
+      } else {
+        this.setInvalid(input);
+      }
+      console.log("validateInput:" + result);
+      return result;
     } else {
       this.setInvalid(input);
+      return false;
     }
-    console.log("validateInput:" + result);
-    return result;
   }
 
   render() {
