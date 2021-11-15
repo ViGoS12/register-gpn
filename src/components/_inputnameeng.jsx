@@ -8,16 +8,21 @@ class InputNameEng extends InputComponent {
     this.validateValue(e.target);
   };
 
-  validateValue(input) {
+  validateValue(input) { 
+    const reSpace = /^((?!\s{2}).)*$/;
     let result = false;
-    const minLen = this.props.minLen;
-    const value = input.value;
-
-    if (value && value.length >= minLen) {
-      result = true;
-      this.setValid(input);
+    if (reSpace.test(String(input.value))) {
+      const minLen = this.props.minLen;
+      const value = input.value;
+      if (value && value.length >= minLen) {
+        result = true;
+        this.setValid(input);
+      } else {
+        this.setInvalid(input);
+      }
     } else {
       this.setInvalid(input);
+      result = false;
     }
     this.props.onValidate(result);
   }

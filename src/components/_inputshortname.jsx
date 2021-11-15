@@ -23,18 +23,20 @@ class InputShortname extends InputComponent {
   }
 
   validateSymbols(input){
-    const re = /^[?!,'":@*—+«‎»()\\/\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
-    //const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
-    const txt = input.value;
+    const reSpace = /^((?!\s{2}).)*$/;
     let result = false;
-
-    if (re.test(String(txt))) {
-      result = true;
-      this.setValid(input);
+    if (reSpace.test(String(input.value))) {
+      const re = /^[?!,'":@*—+«‎»()\\/\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
+      const txt = input.value;
+      if (re.test(String(txt))) {
+        result = true;
+      } else {
+        result = false;
+      }
+      console.log("validateInput:" + result);
     } else {
-      this.setInvalid(input);
+      result = false;
     }
-    console.log("validateInput:" + result);
     return result;
   }
 
