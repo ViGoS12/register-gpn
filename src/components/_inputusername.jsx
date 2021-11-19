@@ -13,7 +13,7 @@ class InputUserName extends InputComponent {
     const minLen = this.props.minLen;
     const value = input.value;
 
-    if (value && this.validateSymbols(input) && value.length >= minLen ) {
+    if (value && this.validateSymbols(input) && value.length > minLen ) {
       result = true;
       this.setValid(input);
     } else {
@@ -23,10 +23,11 @@ class InputUserName extends InputComponent {
   }
 
   validateSymbols(input){
-    const reSpace = /^((?!\s{2}).)*$/;
+    const reSpace = /^((?!\s{1}).)*$/;
     const txt = input.value;
     let result = false;
     if (reSpace.test(String(txt))) {
+      //const re = /^[?!,'":@*—+«‎»()\\/\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
       const re = /^[?!,'"—«‎»\-_.а-яА-ЯёЁ0-9a-zA-Z\s]+$/;
       if (re.test(String(txt))) {
         result = true;

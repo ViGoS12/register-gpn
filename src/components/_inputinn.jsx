@@ -63,6 +63,7 @@ class InputInn extends InputComponent {
             result = true;
           }
           break;
+        default: break;
       }
       if (!result) {
         error.code = 4;

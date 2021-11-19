@@ -163,7 +163,7 @@
         "placeholder": "Введите Ваше имя",
         "validation": {
           "emptyValue": "Необходимо имя",
-          "minLen": 1
+          "minLen": 2
         }
       },
 
@@ -172,7 +172,7 @@
         "placeholder": "Введите фамилию ",
         "validation": {
           "emptyValue": "Необходимо ввести фамилию",
-          "minLen": 1
+          "minLen": 2
         }
       },
 
@@ -181,7 +181,7 @@
         "placeholder": "Введите Отчество",
         "validation": {
           "emptyValue": "Необходимо ввести отчество",
-          "minLen": 1
+          "minLen": 2
         }
       },
 
