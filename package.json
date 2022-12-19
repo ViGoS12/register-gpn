@@ -3,17 +3,23 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@coreui/coreui": "^4.2.4",
+    "@coreui/react": "^4.5.0",
     "bootstrap": "^4.3.1",
     "formdata-polyfill": "^3.0.18",
+    "i18next": "^22.4.6",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.1.0",
     "ie-version": "^0.1.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.6",
+    "react-i18next": "^12.1.1",
     "react-scripts": "^3.4.1",
     "reactstrap": "^8.0.0"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "dev": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
