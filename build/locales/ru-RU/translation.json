@@ -1,0 +1,20 @@
+{
+  "language": "Eng",
+  "title": "Запрос на получение токена",
+  "nonResident" : "Нерезидент",
+  "individual" : "Физические лица",
+  "company" : "Компания", 
+  "email" : "Почта",
+  "regNumber" : "Регистрационный номер",
+  "companyName" : "Наименование компании",
+  "inn" : "ИНН",
+  "kpp" : "КПП",
+  "send" : "Отправить",
+  "successResponseText" : "Токен отправлен на почту",
+  "goBackText" : "Вернутся",
+  "errorResponseText" : "Ошибка получения токена",
+  "getToken" : "Получить токен",
+  "close" : "Закрыть",
+  "KPPNotValid" : "Неверный КПП",
+  "INNNotValid" : "Неверный ИНН"
+}

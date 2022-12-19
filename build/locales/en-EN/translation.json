@@ -1,0 +1,20 @@
+{
+  "language": "Rus",
+  "title": "Token Request",
+  "nonResident": "Non-Resident",
+  "individual": "Individual",
+  "company" : "Company",
+  "email": "Email",
+  "regNumber": "Register Number",
+  "companyName": "Company Name",
+  "inn": "INN",
+  "kpp": "KPP",
+  "send": "Apply",
+  "successResponseText": "Token send to email",
+  "goBackText": "Go back",
+  "errorResponseText": "Token send error",
+  "getToken" : "Get Token",
+  "close" : "Close",
+  "KPPNotValid" : "Not valid KPP",
+  "INNNotValid" : "Not valid INN"
+}
