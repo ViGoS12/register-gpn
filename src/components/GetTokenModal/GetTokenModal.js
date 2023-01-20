@@ -23,7 +23,7 @@ const inputType = {
 function GetTokenModal({ visible, setVisible }) {
   const { t } = useTranslation();
 
-  const [tokenFor, setTokenFor] = useState(inputType.NONRESIDENT);
+  const [tokenFor, setTokenFor] = useState(inputType.COMPANY);
 
   const [tokenResponse, setTokenResponse] = useState({
     showResponse: false,
@@ -55,36 +55,36 @@ function GetTokenModal({ visible, setVisible }) {
     });
   }, [visible]);
 
-  const checkValidFields = (oData) => {
-    const fieldInvalid = {
-      inn: {
-        state: false,
-        message: "",
-      },
-      kpp: {
-        state: false,
-        message: "",
-      },
-    };
+  const checkValidFields = () => {
+    // const fieldInvalid = {
+    //   inn: {
+    //     state: false,
+    //     message: "",
+    //   },
+    //   kpp: {
+    //     state: false,
+    //     message: "",
+    //   },
+    // };
 
-    const inn = oData.get("inn");
+    // const inn = oData.get("inn");
 
-    if (inn) {
-      if (!validateInn(inn, fieldInvalid.inn)) {
-        fieldInvalid.inn.state = true;
-      }
-    }
+    // if (inn) {
+    //   if (!validateInn(inn, fieldInvalid.inn)) {
+    //     fieldInvalid.inn.state = true;
+    //   }
+    // }
 
-    const kpp = oData.get("kpp");
+    // const kpp = oData.get("kpp");
 
-    if (kpp) {
-      if (!validateKPP(kpp, fieldInvalid.kpp)) {
-        fieldInvalid.kpp.state = true;
-      }
-    }
+    // if (kpp) {
+    //   if (!validateKPP(kpp, fieldInvalid.kpp)) {
+    //     fieldInvalid.kpp.state = true;
+    //   }
+    // }
 
-    if (fieldInvalid.inn.state || fieldInvalid.kpp.state) {
-      setFieldsInvalid(fieldInvalid);
+    if (fieldsInvalid.inn.state || fieldsInvalid.kpp.state) {
+      // setFieldsInvalid(fieldInvalid);
       return false;
     } else {
       return true;
@@ -110,7 +110,7 @@ function GetTokenModal({ visible, setVisible }) {
     return result;
   };
 
-  const validateInn = (inn, error) => {
+  const validateInn = (inn, error, length) => {
     var result = false;
     if (typeof inn === "number") {
       inn = inn.toString();
@@ -133,12 +133,23 @@ function GetTokenModal({ visible, setVisible }) {
       };
       switch (inn.length) {
         case 10:
+
+          if (inn.length !== length){
+            error.message = `ИНН может состоять только из ${length} цифр`;
+            return;
+          }
           var n10 = checkDigit(inn, [2, 4, 10, 3, 5, 9, 4, 6, 8]);
           if (n10 === parseInt(inn[9])) {
             result = true;
           }
           break;
         case 12:
+
+        if (inn.length !== length){
+          error.message = `ИНН может состоять только из ${length} цифр`;
+          return;
+        }
+
           var n11 = checkDigit(inn, [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]);
           var n12 = checkDigit(inn, [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8]);
           if (n11 === parseInt(inn[10]) && n12 === parseInt(inn[11])) {
@@ -160,7 +171,7 @@ function GetTokenModal({ visible, setVisible }) {
 
     const oData = new FormData(form.target);
 
-    if (checkValidFields(oData) === true) {
+    if (checkValidFields() === true) {
       const encodeValue = (name) => {
         const value = encodeURI(oData.get(name));
         oData.delete(name);
@@ -245,11 +256,21 @@ function GetTokenModal({ visible, setVisible }) {
           ) : (
             <CForm onSubmit={handleSubmit} on>
               <CFormCheck
+                id="company"
+                type="radio"
+                name="inputType"
+                label={t("company")}
+                defaultChecked
+                onChange={() => {
+                  setTokenFor(inputType.COMPANY);
+                }}
+              />
+
+              <CFormCheck
                 id="nonresident"
                 type="radio"
                 name="inputType"
                 label={t("nonResident")}
-                defaultChecked
                 onChange={() => {
                   setTokenFor(inputType.NONRESIDENT);
                 }}
@@ -265,34 +286,21 @@ function GetTokenModal({ visible, setVisible }) {
                 }}
               />
 
-              <CFormCheck
-                id="company"
-                type="radio"
-                name="inputType"
-                label={t("company")}
-                onChange={() => {
-                  setTokenFor(inputType.COMPANY);
-                }}
-              />
-
-              <CFormInput
-                id="email"
-                type="email"
-                name="email"
-                label={t("email")}
-                required
-              />
-
-              {tokenFor === inputType.INDIVIDUAL && (
+              {/* {tokenFor !== inputType.COMPANY && ( */}
                 <>
                   <CFormInput
-                    id="companyName"
-                    name="shortName" //?
-                    type="text"
-                    label={t("companyName")}
+                    id="email"
+                    type="email"
+                    name="email"
+                    label={t("email")}
                     required
                   />
+                </>
+              {/* // )} */}
 
+              {(tokenFor === inputType.INDIVIDUAL ||
+                tokenFor === inputType.COMPANY) && (
+                <>
                   <CFormInput
                     id="inn"
                     name="inn"
@@ -300,8 +308,54 @@ function GetTokenModal({ visible, setVisible }) {
                     feedbackInvalid={<div>{fieldsInvalid.inn.message}</div>}
                     type="text"
                     label={t("inn")}
+                    onChange={(e) => {
+                      const innState = {
+                        state: false,
+                        message: "",
+                      };
+
+                      if (!validateInn(e.target.value, innState, tokenFor === inputType.COMPANY ? 10 : 12)) {
+                        innState.state = true;
+                      }
+
+                      setFieldsInvalid((prev) => {
+                        return {
+                          ...prev,
+                          inn: innState,
+                        };
+                      });
+                    }}
                     required
                   />
+
+                  {tokenFor === inputType.COMPANY && (
+                    <CFormInput
+                      id="kpp"
+                      type="text"
+                      name="kpp"
+                      invalid={fieldsInvalid.kpp.state}
+                      feedbackInvalid={<div>{fieldsInvalid.kpp.message}</div>}
+                      label={t("kpp")}
+                      onChange={(e) => {
+                        const kppState = { 
+                          state: false,
+                          message: "",
+                        };
+  
+                        if (!validateKPP(e.target.value, kppState)) {
+                          kppState.state = true;
+                        }
+  
+                        setFieldsInvalid((prev) => {
+                          return {
+                            ...prev,
+                            kpp: kppState,
+                          };
+                        });
+                      }}
+                      required
+                    />
+                  )}
                 </>
               )}
 
@@ -314,14 +368,17 @@ function GetTokenModal({ visible, setVisible }) {
                     label={t("regNumber")}
                     required
                   />
+                </>
+              )}
 
+              {(tokenFor === inputType.NONRESIDENT ||
+                tokenFor === inputType.COMPANY) && (
+                <>
                   <CFormInput
-                    id="kpp"
+                    id="companyName"
+                    name="shortName" //?
                     type="text"
-                    name="kpp"
-                    invalid={fieldsInvalid.kpp.state}
-                    feedbackInvalid={<div>{fieldsInvalid.kpp.message}</div>}
-                    label={t("kpp")}
+                    label={t("companyName")}
                     required
                   />
                 </>
