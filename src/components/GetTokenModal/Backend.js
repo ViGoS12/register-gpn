@@ -1,9 +1,12 @@
 class Backend {
   async TokenRequest(formData) {
     return this.sendRequest(
-      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/",
+      "/NDI_EPCOMMON_D~gzpn~regform~service~rs~gazprom-neft.ru/rs/regform/token",
       "POST",
-      {},
+      {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
       formData
     );
   }

@@ -250,7 +250,7 @@ class RegisterPage extends Component {
 
   changeLang = () => {
     this.state.i18nLocal.changeLanguage(
-      this.state.i18nLocal.language === "ru-RU" ? "en-EN" : "ru-RU"
+      this.state.i18nLocal.language === "ru-RU" || this.state.i18nLocal.language === "ru" ? "en-EN" : "ru-RU"
     );
 
     if (this.state.lang === "ru") {
@@ -387,7 +387,7 @@ class RegisterPage extends Component {
             //src="../logo.png"
             alt="logo"
           />
-          <div>
+          {/* <div>
             <button
               className="langbutton"
               title={i18n.langTooltip}
@@ -396,31 +396,53 @@ class RegisterPage extends Component {
             >
               {this.state.lang === "ru" ? "Eng" : "Rus"}
             </button>
-            {/* <button className="langbutton mr-2" href="javascript:void(null);" onClick={this.handleModalFAQ}>FAQ</button> */}
-          </div>
-          <h2>{i18n.caption}</h2>
 
-          <div className="instructionLink m-2">
-            <a
-              href="javascript:void(null);"
-              onClick={() => {
-                this.state.setGetTokenModalVisible(true);
-              }}
-            >
-              {this.state.translateLocal("getToken")}
-            </a>
-          </div>
+          </div> */}
 
-          <div className="instructionLink m-2">
-            <a href="javascript:void(null);" onClick={this.handleFileDownload}>
-              {i18n.formFields.instructionLink.label}
-            </a>
-          </div>
+          <div className="d-flex justify-content-between">
+            <div className="flex-grow-1 w-100">
+              <h2>{i18n.caption}</h2>
+              <div
+                className="lead pb-3"
+                dangerouslySetInnerHTML={{ __html: this.state.headtext }}
+              />
+            </div>
 
-          <div
-            className="lead pb-3"
-            dangerouslySetInnerHTML={{ __html: this.state.headtext }}
-          />
+            <div className="d-flex">
+              <div className="d-flex flex-column">
+                <div className="instructionLink m-2">
+                  <a
+                    href="javascript:void(null);"
+                    onClick={this.handleFileDownload}
+                  >
+                    {i18n.formFields.instructionLink.label}
+                  </a>
+                </div>
+
+                <div className="instructionLink m-2">
+                  <a
+                    href="javascript:void(null);"
+                    onClick={() => {
+                      this.state.setGetTokenModalVisible(true);
+                    }}
+                  >
+                    {this.state.translateLocal("getToken")}
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  className="langbutton"
+                  title={i18n.langTooltip}
+                  href="javascript:void(null);"
+                  onClick={this.changeLang}
+                >
+                  {this.state.lang === "ru" ? "Eng" : "Rus"}
+                </button>
+              </div>
+            </div>
+          </div>
           <Alert
             color={this.state.alertColor}
             isOpen={this.state.alertVisible}
@@ -458,12 +480,11 @@ class RegisterPage extends Component {
 const RegisterPageFuncComponent = (props) => {
   const { t, i18n } = useTranslation();
 
-  const [ modalVisible, setModalVisible ] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
-
-      <GetTokenModal visible={modalVisible} setVisible={setModalVisible}/>
+      <GetTokenModal visible={modalVisible} setVisible={setModalVisible} />
       <RegisterPage
         {...props}
         i18nLocal={i18n}
